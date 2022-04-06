@@ -35,5 +35,4 @@ public class Links {
     @JoinColumn(name = "id_user")
     private Profile profile;
 
-
 }
