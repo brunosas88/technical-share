@@ -1,4 +1,4 @@
-package com.fcamara.technicalshare.technicalshare.academicEducation.model;
+package com.fcamara.technicalshare.technicalshare.academiceducation.model;
 
 import java.time.LocalDate;
 
@@ -35,6 +35,6 @@ public class AcademicEducation {
 
     @ManyToOne
 	@JoinColumn(name = "id_user")
-	private Profile profile;
+	private Profile profileAcademic;
     
 }

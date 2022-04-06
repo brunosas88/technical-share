@@ -1,6 +1,8 @@
 package com.fcamara.technicalshare.technicalshare.profile.model;
 
+import com.fcamara.technicalshare.technicalshare.academiceducation.model.AcademicEducation;
 import com.fcamara.technicalshare.technicalshare.links.model.Links;
+import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +32,14 @@ public class Profile {
     @Column(name = "bio")
     private String bio;
 
-    @OneToMany( mappedBy = "profile")
+    @OneToMany( mappedBy = "profileLink")
     private List<Links> linksList;
+
+    @OneToMany( mappedBy = "profileProfession")
+    private List<Profession> professionList;
+
+    @OneToMany( mappedBy = "profileAcademic")
+    private List<AcademicEducation> academicEducationList;
 
     @ManyToMany
     @JoinTable(

@@ -29,6 +29,6 @@ public class Links {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private Profile profile;
+    private Profile profileLink;
 
 }
