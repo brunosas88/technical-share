@@ -1,6 +1,6 @@
-package com.fcamara.technicalshare.technicalshare.Professional.model;
+package com.fcamara.technicalshare.technicalshare.professional.model;
 
-import com.fcamara.technicalshare.technicalshare.Profile.model.Profile;
+import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;

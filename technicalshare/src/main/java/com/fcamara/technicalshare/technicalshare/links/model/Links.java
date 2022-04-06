@@ -1,16 +1,12 @@
 package com.fcamara.technicalshare.technicalshare.links.model;
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
