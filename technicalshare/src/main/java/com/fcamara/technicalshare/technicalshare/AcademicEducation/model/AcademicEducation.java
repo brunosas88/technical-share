@@ -1,8 +1,8 @@
-package com.fcamara.technicalshare.technicalshare.AcademicEducation.model;
+package com.fcamara.technicalshare.technicalshare.academicEducation.model;
 
 import java.time.LocalDate;
 
-import com.fcamara.technicalshare.technicalshare.Profile.model.Profile;
+import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
