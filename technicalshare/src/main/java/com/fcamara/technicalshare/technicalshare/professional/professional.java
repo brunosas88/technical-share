@@ -1,4 +1,4 @@
-package com.fcamara.technicalshare.technicalshare.model;
+package com.fcamara.technicalshare.technicalshare.professional;
 
 public class professional {
 	private Integer id;
