@@ -1,4 +1,4 @@
-package com.fcamara.technicalshare.technicalshare.professional.model;
+package com.fcamara.technicalshare.technicalshare.profession.model;
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="professional")
-public class Professional {
+public class Profession {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
