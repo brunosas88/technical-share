@@ -1,4 +1,4 @@
-package com.fcamara.technicalshare.technicalshare.model;
+package com.fcamara.technicalshare.technicalshare.skill.model;
 
 public class skill {
     private Integer id;

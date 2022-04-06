@@ -1,4 +1,4 @@
-package com.fcamara.technicalshare.technicalshare.model;
+package com.fcamara.technicalshare.technicalshare.profile.model;
 
 public class profile {
     private Integer id;
