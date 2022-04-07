@@ -8,14 +8,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ResponseLinksDTO {
+public class LinksDTO {
 
     private String domain;
     private String link;
     private Boolean disponibility;
 
-    public static ResponseLinksDTO convertToDTO (Links links) {
-        ResponseLinksDTO dto = new ResponseLinksDTO();
+    public static LinksDTO convertToDTO (Links links) {
+        LinksDTO dto = new LinksDTO();
         dto.setDomain(links.getDomain());
         dto.setLink(links.getLink());
         dto.setDisponibility(links.getDisponibility());
