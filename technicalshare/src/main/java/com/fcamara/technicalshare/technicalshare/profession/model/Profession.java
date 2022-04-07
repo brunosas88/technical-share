@@ -1,18 +1,17 @@
 package com.fcamara.technicalshare.technicalshare.profession.model;
 
-import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter 
+import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
+import lombok.*;
+
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="professional")
+@ToString
+@Entity(name="profession")
 public class Profession {
 
 	@Id
@@ -33,7 +32,6 @@ public class Profession {
 
 	@ManyToOne
 	@JoinColumn(name = "id_user")
-	private Profile profile;
-	
+	private Profile profileProfession;
 
 }

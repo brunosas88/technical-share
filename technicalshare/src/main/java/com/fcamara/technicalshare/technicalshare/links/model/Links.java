@@ -1,10 +1,7 @@
 package com.fcamara.technicalshare.technicalshare.links.model;
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "links")
 public class Links {
     @Id
@@ -29,6 +27,6 @@ public class Links {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private Profile profile;
+    private Profile profileLink;
 
 }

@@ -1,19 +1,18 @@
-package com.fcamara.technicalshare.technicalshare.academicEducation.model;
+package com.fcamara.technicalshare.technicalshare.academiceducation.model;
 
 import java.time.LocalDate;
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter 
+import lombok.*;
+
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name="academic_education")
 public class AcademicEducation {
 
@@ -35,7 +34,6 @@ public class AcademicEducation {
 
     @ManyToOne
 	@JoinColumn(name = "id_user")
-	private Profile profile;
-    
+	private Profile profileAcademic;
     
 }

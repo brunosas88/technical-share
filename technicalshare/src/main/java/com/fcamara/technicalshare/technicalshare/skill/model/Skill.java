@@ -1,10 +1,7 @@
 package com.fcamara.technicalshare.technicalshare.skill.model;
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "skill")
 public class Skill {
     @Id
@@ -28,9 +26,9 @@ public class Skill {
     @Column(name = "category")
     private String category;
 
-    @ManyToMany(mappedBy = "expertiseList")
-    private List<Profile> profileExpertiseList;
+   @ManyToMany(mappedBy = "expertiseList")
+   private List<Profile> profileExpertiseList;
 
-    @ManyToMany(mappedBy = "interestsList")
-    private List<Profile> profileInterestsList;
+   @ManyToMany(mappedBy = "interestsList")
+   private List<Profile> profileInterestsList;
 }
