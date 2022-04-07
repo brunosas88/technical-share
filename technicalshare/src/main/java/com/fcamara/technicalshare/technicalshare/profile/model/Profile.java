@@ -1,10 +1,5 @@
-package com.fcamara.technicalshare.technicalshare.Profile.model;
+package com.fcamara.technicalshare.technicalshare.profile.model;
 
-<<<<<<< HEAD
-public class Profile {
-    private String name;
-}
-=======
 import com.fcamara.technicalshare.technicalshare.academiceducation.model.AcademicEducation;
 import com.fcamara.technicalshare.technicalshare.links.model.Links;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
@@ -62,4 +57,3 @@ public class Profile {
     )
     private List<Skill> interestsList = new ArrayList<>();
 }
->>>>>>> c1b9ea98487012ead47a180fd1e6065e53c52a4c

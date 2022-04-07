@@ -2,18 +2,13 @@ package com.fcamara.technicalshare.technicalshare.profession.model;
 
 
 import javax.persistence.*;
-<<<<<<< HEAD
-=======
 
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
->>>>>>> c1b9ea98487012ead47a180fd1e6065e53c52a4c
-
-import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import lombok.*;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -42,9 +37,5 @@ public class Profession {
 	@ManyToOne
 	@JoinColumn(name = "id_user")
 	private Profile profileProfession;
-<<<<<<< HEAD
-=======
-	
->>>>>>> c1b9ea98487012ead47a180fd1e6065e53c52a4c
 
 }
