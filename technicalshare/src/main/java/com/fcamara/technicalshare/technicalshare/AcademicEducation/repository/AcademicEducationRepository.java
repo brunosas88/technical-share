@@ -1,7 +1,6 @@
-package com.fcamara.technicalshare.technicalshare.academicEducation.repository;
+package com.fcamara.technicalshare.technicalshare.academiceducation.repository;
 
-import com.fcamara.technicalshare.technicalshare.academicEducation.model.AcademicEducation;
-
+import com.fcamara.technicalshare.technicalshare.academiceducation.model.AcademicEducation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
