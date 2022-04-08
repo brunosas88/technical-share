@@ -26,9 +26,9 @@ public class Skill {
     @Column(name = "category")
     private String category;
 
-//    @ManyToMany(mappedBy = "expertiseList")
-//    private List<Profile> profileExpertiseList;
-//
-//    @ManyToMany(mappedBy = "interestsList")
-//    private List<Profile> profileInterestsList;
+   @ManyToMany(mappedBy = "expertiseList")
+   private List<Profile> profileExpertiseList;
+
+   @ManyToMany(mappedBy = "interestsList")
+   private List<Profile> profileInterestsList;
 }

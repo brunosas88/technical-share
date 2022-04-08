@@ -1,12 +1,13 @@
 package com.fcamara.technicalshare.technicalshare.profile.dto;
 
-import com.fcamara.technicalshare.technicalshare.academiceducation.dto.ResponseAcademicEducationDTO;
+import com.fcamara.technicalshare.technicalshare.academiceducation.dto.AcademicEducationDTO;
 import com.fcamara.technicalshare.technicalshare.links.dto.LinksDTO;
-import com.fcamara.technicalshare.technicalshare.profession.dto.ResponseProfessionDTO;
+import com.fcamara.technicalshare.technicalshare.profession.dto.ProfessionDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import com.fcamara.technicalshare.technicalshare.skill.dto.ResponseSkillDTO;
+import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +21,11 @@ public class ProfileDTO {
     private String userName;
     private String email;
     private String bio;
-    private List<LinksDTO> linksListDTO;
-//    private List<ResponseSkillDTO> expertiseList;
-//    private List<ResponseSkillDTO> interestsList;
-//    private List<ResponseProfessionDTO> professionList;
-//    private List<ResponseAcademicEducationDTO> academicEducationList;
+    private List<LinksDTO> linksListDTO = new ArrayList<>();
+    private List<SkillDTO> expertiseList = new ArrayList<>();
+    private List<SkillDTO> interestsList = new ArrayList<>();
+    private List<ProfessionDTO> professionList = new ArrayList<>();
+    private List<AcademicEducationDTO> academicEducationList = new ArrayList<>();
 
     public static ProfileDTO convertToDTO (Profile profile) {
         ProfileDTO dto = new ProfileDTO();
@@ -35,22 +36,22 @@ public class ProfileDTO {
                 .stream()
                 .map(LinksDTO::convertToDTO)
                 .collect(Collectors.toList());
-//        dto.expertiseList = profile.getExpertiseList()
-//                .stream()
-//                .map(ResponseSkillDTO::convertToDTO)
-//                .collect(Collectors.toList());
-//        dto.interestsList = profile.getInterestsList()
-//                .stream()
-//                .map(ResponseSkillDTO::convertToDTO)
-//                .collect(Collectors.toList());
-//        dto.professionList = profile.getProfessionList()
-//                .stream()
-//                .map(ResponseProfessionDTO::convertToDTO)
-//                .collect(Collectors.toList());
-//        dto.academicEducationList = profile.getAcademicEducationList()
-//                .stream()
-//                .map(ResponseAcademicEducationDTO::convertToDTO)
-//                .collect(Collectors.toList());
+       dto.expertiseList = profile.getExpertiseList()
+               .stream()
+               .map(SkillDTO::convertToDTO)
+               .collect(Collectors.toList());
+       dto.interestsList = profile.getInterestsList()
+               .stream()
+               .map(SkillDTO::convertToDTO)
+               .collect(Collectors.toList());
+       dto.professionList = profile.getProfessionList()
+               .stream()
+               .map(ProfessionDTO::convertToDTO)
+               .collect(Collectors.toList());
+       dto.academicEducationList = profile.getAcademicEducationList()
+               .stream()
+               .map(AcademicEducationDTO::convertToDTO)
+               .collect(Collectors.toList());
 
         return dto;
     }
