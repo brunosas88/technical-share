@@ -15,13 +15,13 @@ public class AcademicEducationService {
 
     private final AcademicEducationRepository academicEducationRepository;
 
-    public AcademicEducation registerAcademicEducation(AcademicEducationDTO academicEducationDTO, Profile profile){
+    public AcademicEducation registerAcademicEducation(AcademicEducationDTO academicEducationDTO, Profile Profile){
         AcademicEducation newAcademicEducation = new AcademicEducation();
         newAcademicEducation.setCourse(academicEducationDTO.getCourse());
         newAcademicEducation.setStartDate(academicEducationDTO.getStartDate());
         newAcademicEducation.setFinalDate(academicEducationDTO.getFinalDate());
         newAcademicEducation.setInstitution(academicEducationDTO.getInstitution());
-        newAcademicEducation.setProfileAcademic(profile);
+        newAcademicEducation.setProfileAcademic(Profile);
         return academicEducationRepository.save(newAcademicEducation);
     }
     

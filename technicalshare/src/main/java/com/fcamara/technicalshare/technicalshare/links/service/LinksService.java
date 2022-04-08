@@ -14,12 +14,12 @@ public class LinksService {
 
     private final LinksRepository linksRepository;
 
-    public Links registerLink(LinksDTO linkDTO, Profile profile){
+    public Links registerLink(LinksDTO linkDTO, Profile Profile){
         Links newLink = new Links();
         newLink.setDomain(linkDTO.getDomain());
         newLink.setLink(linkDTO.getLink());
         newLink.setDisponibility(linkDTO.getDisponibility());
-        newLink.setProfileLink(profile);
+        newLink.setProfileLink(Profile);
         return linksRepository.save(newLink);
     }
 }

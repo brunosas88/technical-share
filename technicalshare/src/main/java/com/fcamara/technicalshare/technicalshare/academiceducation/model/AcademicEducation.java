@@ -32,8 +32,8 @@ public class AcademicEducation {
     @Column(name = "institution")
     private String institution;
 
-//    @ManyToOne
-//	@JoinColumn(name = "id_user")
-//	private Profile profileAcademic;
+    @ManyToOne
+	@JoinColumn(name = "id_profile")
+	private Profile profileAcademic;
     
 }

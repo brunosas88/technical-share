@@ -14,13 +14,13 @@ public class ProfessionService {
 
     private final ProfessionRepository professionRepository;
 
-    public Profession registerProfession(ProfessionDTO professionDTO, Profile profile){
+    public Profession registerProfession(ProfessionDTO professionDTO, Profile Profile){
         Profession newProfession = new Profession();
         newProfession.setOccupation(professionDTO.getOccupation());
         newProfession.setDuration(professionDTO.getDuration());
         newProfession.setDescription(professionDTO.getDescription());
         newProfession.setExperienceLevel(professionDTO.getExperienceLevel());
-        newProfession.setProfileProfession(profile);
+        newProfession.setProfileProfession(Profile);
         return professionRepository.save(newProfession);
     }
     

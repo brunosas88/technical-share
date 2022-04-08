@@ -15,7 +15,7 @@ public class SkillService {
 
     private final SkillRepository skillRepository;
 
-    public Skill registerSkill(SkillDTO skillDTO, Profile profile){
+    public Skill registerSkill(SkillDTO skillDTO, Profile Profile){
         Skill newSkill = new Skill();
 
         newSkill.setSkill(skillDTO.getSkill());
