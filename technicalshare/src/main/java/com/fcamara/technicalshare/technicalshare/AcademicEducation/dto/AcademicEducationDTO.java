@@ -23,7 +23,6 @@ public class AcademicEducationDTO {
         dto.setStartDate(academicEducation.getStartDate());
         dto.setFinalDate(academicEducation.getFinalDate());
         dto.setInstitution(academicEducation.getInstitution());
-
         return dto;
     }
 }
