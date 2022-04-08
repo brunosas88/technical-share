@@ -37,16 +37,16 @@ public class ProfileService {
                 .map(newLink -> linksService.registerLink(newLink, newProfile))
                 .collect(Collectors.toList())
         );
-        // newProfile.getExpertiseList().addAll(profileDTO.getExpertiseList()
-        //         .stream()
-        //         .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
-        //         .collect(Collectors.toList())
-        // );
-        // newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
-        //         .stream()
-        //         .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
-        //         .collect(Collectors.toList())
-        // );
+        newProfile.getExpertiseList().addAll(profileDTO.getExpertiseList()
+                .stream()
+                .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
+                .collect(Collectors.toList())
+        );
+        newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
+                .stream()
+                .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
+                .collect(Collectors.toList())
+        );
         newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))

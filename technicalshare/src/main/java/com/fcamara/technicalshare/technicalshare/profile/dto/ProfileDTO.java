@@ -7,6 +7,7 @@ import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +21,11 @@ public class ProfileDTO {
     private String userName;
     private String email;
     private String bio;
-    private List<LinksDTO> linksListDTO;
-    private List<SkillDTO> expertiseList;
-    private List<SkillDTO> interestsList;
-    private List<ProfessionDTO> professionList;
-    private List<AcademicEducationDTO> academicEducationList;
+    private List<LinksDTO> linksListDTO = new ArrayList<>();
+    private List<SkillDTO> expertiseList = new ArrayList<>();
+    private List<SkillDTO> interestsList = new ArrayList<>();
+    private List<ProfessionDTO> professionList = new ArrayList<>();
+    private List<AcademicEducationDTO> academicEducationList = new ArrayList<>();
 
     public static ProfileDTO convertToDTO (Profile profile) {
         ProfileDTO dto = new ProfileDTO();

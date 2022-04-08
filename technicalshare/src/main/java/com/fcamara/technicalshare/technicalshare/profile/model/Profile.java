@@ -33,13 +33,13 @@ public class Profile {
     private String bio;
 
     @OneToMany( mappedBy = "profileLink")
-    private List<Links> linksList;
+    private List<Links> linksList = new ArrayList<>();
 
     @OneToMany( mappedBy = "profileProfession")
-    private List<Profession> professionList;
+    private List<Profession> professionList = new ArrayList<>();
 
     @OneToMany( mappedBy = "profileAcademic")
-    private List<AcademicEducation> academicEducationList;
+    private List<AcademicEducation> academicEducationList = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
