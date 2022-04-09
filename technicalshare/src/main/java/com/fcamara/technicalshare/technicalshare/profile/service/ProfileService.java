@@ -39,12 +39,12 @@ public class ProfileService {
         );
         newProfile.getExpertiseList().addAll(profileDTO.getExpertiseList()
                 .stream()
-                .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
+                .map(newSkill -> skillService.registerProfileSkill(newSkill))
                 .collect(Collectors.toList())
         );
         newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
                 .stream()
-                .map(newSkill -> skillService.registerSkill(newSkill, newProfile))
+                .map(newSkill -> skillService.registerProfileSkill(newSkill))
                 .collect(Collectors.toList())
         );
         newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
