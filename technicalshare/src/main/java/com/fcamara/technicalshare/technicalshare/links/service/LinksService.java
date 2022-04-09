@@ -18,7 +18,6 @@ public class LinksService {
         Links newLink = new Links();
         newLink.setDomain(linkDTO.getDomain());
         newLink.setLink(linkDTO.getLink());
-        newLink.setDisponibility(linkDTO.getDisponibility());
         newLink.setProfileLink(Profile);
         return linksRepository.save(newLink);
     }

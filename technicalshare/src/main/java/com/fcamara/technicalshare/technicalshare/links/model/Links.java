@@ -22,9 +22,6 @@ public class Links {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "disponibility")
-    private Boolean disponibility;
-
     @ManyToOne
     @JoinColumn(name = "id_profile")
     private Profile profileLink;
