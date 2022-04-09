@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "user")
+@Entity(name = "profile")
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,26 +33,26 @@ public class Profile {
     private String bio;
 
     @OneToMany( mappedBy = "profileLink")
-    private List<Links> linksList;
+    private List<Links> linksList = new ArrayList<>();
 
     @OneToMany( mappedBy = "profileProfession")
-    private List<Profession> professionList;
+    private List<Profession> professionList = new ArrayList<>();
 
     @OneToMany( mappedBy = "profileAcademic")
-    private List<AcademicEducation> academicEducationList;
+    private List<AcademicEducation> academicEducationList = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "user_skill_expertise",
-            joinColumns = {@JoinColumn(name = "id_user")},
+            name = "profile_skill_expertise",
+            joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_skill")}
     )
     private List<Skill> expertiseList = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "user_skill_interests",
-            joinColumns = {@JoinColumn(name = "id_user")},
+            name = "profile_skill_interests",
+            joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_skill")}
     )
     private List<Skill> interestsList = new ArrayList<>();

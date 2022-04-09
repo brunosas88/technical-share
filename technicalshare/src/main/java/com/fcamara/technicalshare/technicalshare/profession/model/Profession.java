@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter 
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="professional")
+@ToString
+@Entity(name="profession")
 public class Profession {
 
 	@Id
@@ -33,8 +35,7 @@ public class Profession {
 	private String experienceLevel;
 
 	@ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_profile")
 	private Profile profileProfession;
-	
 
 }
