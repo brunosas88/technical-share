@@ -26,7 +26,7 @@ public class Links {
     private Boolean disponibility;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_profile")
     private Profile profileLink;
 
 }

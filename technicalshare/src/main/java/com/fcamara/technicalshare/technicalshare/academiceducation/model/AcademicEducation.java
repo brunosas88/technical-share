@@ -33,7 +33,7 @@ public class AcademicEducation {
     private String institution;
 
     @ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_profile")
 	private Profile profileAcademic;
     
 }

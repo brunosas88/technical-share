@@ -27,28 +27,28 @@ public class ProfileDTO {
     private List<ProfessionDTO> professionList = new ArrayList<>();
     private List<AcademicEducationDTO> academicEducationList = new ArrayList<>();
 
-    public static ProfileDTO convertToDTO (Profile profile) {
+    public static ProfileDTO convertToDTO (Profile Profile) {
         ProfileDTO dto = new ProfileDTO();
-        dto.setUserName(profile.getUserName());
-        dto.setEmail(profile.getEmail());
-        dto.setBio(profile.getBio());
-        dto.linksListDTO = profile.getLinksList()
+        dto.setUserName(Profile.getUserName());
+        dto.setEmail(Profile.getEmail());
+        dto.setBio(Profile.getBio());
+        dto.linksListDTO = Profile.getLinksList()
                 .stream()
                 .map(LinksDTO::convertToDTO)
                 .collect(Collectors.toList());
-       dto.expertiseList = profile.getExpertiseList()
+       dto.expertiseList = Profile.getExpertiseList()
                .stream()
                .map(SkillDTO::convertToDTO)
                .collect(Collectors.toList());
-       dto.interestsList = profile.getInterestsList()
+       dto.interestsList = Profile.getInterestsList()
                .stream()
                .map(SkillDTO::convertToDTO)
                .collect(Collectors.toList());
-       dto.professionList = profile.getProfessionList()
+       dto.professionList = Profile.getProfessionList()
                .stream()
                .map(ProfessionDTO::convertToDTO)
                .collect(Collectors.toList());
-       dto.academicEducationList = profile.getAcademicEducationList()
+       dto.academicEducationList = Profile.getAcademicEducationList()
                .stream()
                .map(AcademicEducationDTO::convertToDTO)
                .collect(Collectors.toList());

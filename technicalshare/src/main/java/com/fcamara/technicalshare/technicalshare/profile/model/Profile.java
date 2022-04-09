@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "user")
+@Entity(name = "profile")
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,16 +43,16 @@ public class Profile {
 
     @ManyToMany
     @JoinTable(
-            name = "user_skill_expertise",
-            joinColumns = {@JoinColumn(name = "id_user")},
+            name = "profile_skill_expertise",
+            joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_skill")}
     )
     private List<Skill> expertiseList = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "user_skill_interests",
-            joinColumns = {@JoinColumn(name = "id_user")},
+            name = "profile_skill_interests",
+            joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_skill")}
     )
     private List<Skill> interestsList = new ArrayList<>();

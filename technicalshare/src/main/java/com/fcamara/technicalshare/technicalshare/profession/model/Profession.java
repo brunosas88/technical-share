@@ -35,7 +35,7 @@ public class Profession {
 	private String experienceLevel;
 
 	@ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_profile")
 	private Profile profileProfession;
 
 }
