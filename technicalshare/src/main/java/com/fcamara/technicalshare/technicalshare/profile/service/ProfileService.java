@@ -57,6 +57,7 @@ public class ProfileService {
         .map(newAcademicEducation -> academicEducationService.registerAcademicEducation(newAcademicEducation, newProfile))
         .collect(Collectors.toList())
         );
+
         return ProfileDTO.convertToDTO(newProfile);
     }
 
