@@ -9,6 +9,9 @@ import com.fcamara.technicalshare.technicalshare.profile.repository.ProfileRepos
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.query.JpaEntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,7 +64,7 @@ public class ProfileService {
         return ProfileDTO.convertToDTO(newProfile);
     }
 
-    public List<ProfileDTO> findAllProfile() {
-        return profileRepository.findAll().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+    public Page<ProfileDTO> findAllProfile(Pageable pageable) {
+        return profileRepository.findAll(pageable).map(ProfileDTO::convertToDTO);
     }
 }

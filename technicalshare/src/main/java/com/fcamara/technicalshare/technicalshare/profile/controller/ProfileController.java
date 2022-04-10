@@ -4,6 +4,8 @@ import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
 import com.fcamara.technicalshare.technicalshare.profile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,8 @@ public class ProfileController {
     private final ProfileService profileService;
     
     @GetMapping("/all")
-    public ResponseEntity<List<ProfileDTO>> findAllProfile() {
-        return ResponseEntity.ok(profileService.findAllProfile());
+    public ResponseEntity<Page<ProfileDTO>> findAllProfile(Pageable pageable) {
+        return ResponseEntity.ok(profileService.findAllProfile(pageable));
     }
     
     @GetMapping("/findprofile")
