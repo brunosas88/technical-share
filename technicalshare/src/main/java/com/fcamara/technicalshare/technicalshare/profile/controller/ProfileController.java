@@ -2,7 +2,6 @@ package com.fcamara.technicalshare.technicalshare.profile.controller;
 
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
 import com.fcamara.technicalshare.technicalshare.profile.service.ProfileService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -11,31 +10,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/profiles")
 @RequiredArgsConstructor
 public class ProfileController {
 
     private final ProfileService profileService;
     
-    @GetMapping("/all")
+    @GetMapping("/findall")
     public ResponseEntity<Page<ProfileDTO>> findAllProfile(@Nullable Pageable pageable) {
         return ResponseEntity.ok(profileService.findAllProfile(pageable));
     }
+
+    @GetMapping("/findbyname")
+    public ResponseEntity<Page<ProfileDTO>> findProfileByUserName (String name, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findProfileByUserName(name, pageable));
+    }
     
     @GetMapping("/findprofile")
-    public ResponseEntity<ProfileDTO> findProfile(@RequestParam String email) {
+    public ResponseEntity<ProfileDTO> findProfileByEmail(@RequestParam String email) {
         return ResponseEntity.ok(profileService.findProfile(email));
     }
 
-    @PostMapping
+    @PostMapping("register")
 	public ResponseEntity<ProfileDTO> registerProfile(@RequestBody ProfileDTO profileDTO){
 		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
 	}
 
-    @GetMapping("/findprofilesbyskill")
+    @GetMapping("/findbyskill")
     public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@RequestParam String skill, @Nullable Pageable pageable) {
         return ResponseEntity.ok(profileService.getProfileBySkill(skill, pageable));
     }

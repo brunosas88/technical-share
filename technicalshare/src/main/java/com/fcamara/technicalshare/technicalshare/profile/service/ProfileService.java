@@ -29,9 +29,7 @@ public class ProfileService {
     private final ProfessionService professionService;
     private final AcademicEducationService academicEducationService;
 
-    public ProfileDTO findProfile (String email) {
-        return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
-    }
+
 
     public ProfileDTO registerProfile(ProfileDTO profileDTO) {
 
@@ -68,6 +66,13 @@ public class ProfileService {
 
     public Page<ProfileDTO> findAllProfile(Pageable pageable) {
         return profileRepository.findAll(pageable).map(ProfileDTO::convertToDTO);
+    }
+
+    public ProfileDTO findProfile (String email) {
+        return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
+    }
+    public Page<ProfileDTO> findProfileByUserName (String name, Pageable pageable) {
+        return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
     }
 
     public Page<ProfileDTO> getProfileBySkill(String requiredSkill, Pageable pageable) {
