@@ -11,14 +11,12 @@ import lombok.*;
 public class SkillDTO {
 
     private String skill;
-    private String subcategory;
-    private String category;
+    private String area;
 
     public static SkillDTO convertToDTO(Skill skill) {
         SkillDTO dto = new SkillDTO();
         dto.setSkill(skill.getSkill());
-        dto.setSubcategory(skill.getSubcategory());
-        dto.setCategory(skill.getCategory());
+        dto.setArea(skill.getArea());
         return dto;
     }
 }

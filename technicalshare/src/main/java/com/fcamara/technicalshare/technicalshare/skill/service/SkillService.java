@@ -28,8 +28,7 @@ public class SkillService {
         skillDTOList.forEach (skillDTO -> {
             Skill newSkill = new Skill();
             newSkill.setSkill(skillDTO.getSkill());
-            newSkill.setSubcategory(skillDTO.getSubcategory());
-            newSkill.setCategory(skillDTO.getCategory());
+            newSkill.setArea(skillDTO.getArea());
             skillRepository.save(newSkill);
         });
         return getAllSkills();

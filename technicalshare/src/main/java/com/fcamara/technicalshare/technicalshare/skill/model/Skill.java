@@ -21,15 +21,12 @@ public class Skill {
     @Column(name = "skill")
     private String skill;
 
-    @Column(name = "subcategory")
-    private String subcategory;
+    @Column(name = "area")
+    private String area;
 
-    @Column(name = "category")
-    private String category;
+    @ManyToMany(mappedBy = "expertiseList")
+    private List<Profile> profileExpertiseList = new ArrayList<>();
 
-   @ManyToMany(mappedBy = "expertiseList")
-   private List<Profile> profileExpertiseList = new ArrayList<>();
-
-   @ManyToMany(mappedBy = "interestsList")
-   private List<Profile> profileInterestsList;
+    @ManyToMany(mappedBy = "interestsList")
+    private List<Profile> profileInterestsList;
 }
