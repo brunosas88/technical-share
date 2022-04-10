@@ -17,7 +17,8 @@ public class ProfessionService {
     public Profession registerProfession(ProfessionDTO professionDTO, Profile Profile){
         Profession newProfession = new Profession();
         newProfession.setOccupation(professionDTO.getOccupation());
-        newProfession.setDuration(professionDTO.getDuration());
+        newProfession.setStartDate(professionDTO.getStartDate());
+        newProfession.setFinalDate(professionDTO.getFinalDate());
         newProfession.setDescription(professionDTO.getDescription());
         newProfession.setExperienceLevel(professionDTO.getExperienceLevel());
         newProfession.setProfileProfession(Profile);

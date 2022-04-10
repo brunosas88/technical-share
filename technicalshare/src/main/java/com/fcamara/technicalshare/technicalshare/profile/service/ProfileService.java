@@ -6,9 +6,14 @@ import com.fcamara.technicalshare.technicalshare.profession.service.ProfessionSe
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.profile.repository.ProfileRepository;
+import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.query.JpaEntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,14 +44,14 @@ public class ProfileService {
         );
         newProfile.getExpertiseList().addAll(profileDTO.getExpertiseList()
                 .stream()
-                .map(newSkill -> skillService.registerProfileSkill(newSkill))
+                .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
                 .collect(Collectors.toList())
         );
-        newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
-                .stream()
-                .map(newSkill -> skillService.registerProfileSkill(newSkill))
-                .collect(Collectors.toList())
-        );
+//        newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
+//                .stream()
+//                .map(newSkill -> skillService.registerProfileSkill(newSkill))
+//                .collect(Collectors.toList())
+//        );
         newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))
@@ -57,10 +62,30 @@ public class ProfileService {
         .map(newAcademicEducation -> academicEducationService.registerAcademicEducation(newAcademicEducation, newProfile))
         .collect(Collectors.toList())
         );
+
         return ProfileDTO.convertToDTO(newProfile);
     }
 
-    public List<ProfileDTO> findAllProfile() {
-        return profileRepository.findAll().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+    public Page<ProfileDTO> findAllProfile(Pageable pageable) {
+        return profileRepository.findAll(pageable).map(ProfileDTO::convertToDTO);
     }
+
+    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, Pageable pageable) {
+        Skill skill = skillService.getSkillBySkill(requiredSkill);
+        List<ProfileDTO> profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+        return toPage(profileDTOList, pageable);
+    }
+
+    private Page toPage(List list, Pageable pageable) {
+        if (pageable.getOffset() >= list.size()) {
+            return Page.empty();
+        }
+        int startIndex = (int)pageable.getOffset();
+        int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ?
+                list.size() :
+                pageable.getOffset() + pageable.getPageSize());
+        List subList = list.subList(startIndex, endIndex);
+        return new PageImpl(subList, pageable, list.size());
+    }
+
 }

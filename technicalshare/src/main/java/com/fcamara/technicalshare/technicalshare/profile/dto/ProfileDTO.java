@@ -23,7 +23,7 @@ public class ProfileDTO {
     private String bio;
     private List<LinksDTO> linksListDTO = new ArrayList<>();
     private List<SkillDTO> expertiseList = new ArrayList<>();
-    private List<SkillDTO> interestsList = new ArrayList<>();
+//    private List<SkillDTO> interestsList = new ArrayList<>();
     private List<ProfessionDTO> professionList = new ArrayList<>();
     private List<AcademicEducationDTO> academicEducationList = new ArrayList<>();
 
@@ -40,10 +40,10 @@ public class ProfileDTO {
                .stream()
                .map(SkillDTO::convertToDTO)
                .collect(Collectors.toList());
-       dto.interestsList = Profile.getInterestsList()
-               .stream()
-               .map(SkillDTO::convertToDTO)
-               .collect(Collectors.toList());
+//       dto.interestsList = Profile.getInterestsList()
+//               .stream()
+//               .map(SkillDTO::convertToDTO)
+//               .collect(Collectors.toList());
        dto.professionList = Profile.getProfessionList()
                .stream()
                .map(ProfessionDTO::convertToDTO)

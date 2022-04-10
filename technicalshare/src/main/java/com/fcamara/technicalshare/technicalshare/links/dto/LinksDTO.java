@@ -12,13 +12,11 @@ public class LinksDTO {
 
     private String domain;
     private String link;
-    private Boolean disponibility;
 
     public static LinksDTO convertToDTO (Links links) {
         LinksDTO dto = new LinksDTO();
         dto.setDomain(links.getDomain());
         dto.setLink(links.getLink());
-        dto.setDisponibility(links.getDisponibility());
         return dto;
     }
 

@@ -2,9 +2,13 @@ package com.fcamara.technicalshare.technicalshare.profile.controller;
 
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
 import com.fcamara.technicalshare.technicalshare.profile.service.ProfileService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +21,8 @@ public class ProfileController {
     private final ProfileService profileService;
     
     @GetMapping("/all")
-    public ResponseEntity<List<ProfileDTO>> findAllProfile() {
-        return ResponseEntity.ok(profileService.findAllProfile());
+    public ResponseEntity<Page<ProfileDTO>> findAllProfile(@Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findAllProfile(pageable));
     }
     
     @GetMapping("/findprofile")
@@ -30,5 +34,10 @@ public class ProfileController {
 	public ResponseEntity<ProfileDTO> registerProfile(@RequestBody ProfileDTO profileDTO){
 		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
 	}
+
+    @GetMapping("/findprofilesbyskill")
+    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@RequestParam String skill, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.getProfileBySkill(skill, pageable));
+    }
 
 }

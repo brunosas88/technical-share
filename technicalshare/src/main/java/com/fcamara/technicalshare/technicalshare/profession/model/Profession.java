@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,8 +27,11 @@ public class Profession {
 	@Column(name="occupation")
 	private String occupation;
 
-	@Column(name="duration")
-	private Integer duration;
+	@Column(name="start_date")
+	private LocalDate startDate;
+
+	@Column(name="final_date")
+	private LocalDate finalDate;
 
 	@Column(name="description")
 	private String description;

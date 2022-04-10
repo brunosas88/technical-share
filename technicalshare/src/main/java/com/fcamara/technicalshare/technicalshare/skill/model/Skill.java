@@ -4,6 +4,7 @@ import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,15 +21,12 @@ public class Skill {
     @Column(name = "skill")
     private String skill;
 
-    @Column(name = "subcategory")
-    private String subcategory;
+    @Column(name = "area")
+    private String area;
 
-    @Column(name = "category")
-    private String category;
+    @ManyToMany(mappedBy = "expertiseList")
+    private List<Profile> profileExpertiseList = new ArrayList<>();
 
-   @ManyToMany(mappedBy = "expertiseList")
-   private List<Profile> profileExpertiseList;
-
-   @ManyToMany(mappedBy = "interestsList")
-   private List<Profile> profileInterestsList;
+    @ManyToMany(mappedBy = "interestsList")
+    private List<Profile> profileInterestsList;
 }

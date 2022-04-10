@@ -26,7 +26,7 @@ public class Profile {
     @Column(name = "username")
     private String userName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "bio")
