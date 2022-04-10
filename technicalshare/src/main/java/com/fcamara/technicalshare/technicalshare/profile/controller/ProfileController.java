@@ -35,4 +35,9 @@ public class ProfileController {
 		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
 	}
 
+    @GetMapping("/find-profile-by-skill")
+    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@RequestParam String skill, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.getProfileBySkill(skill, pageable));
+    }
+
 }

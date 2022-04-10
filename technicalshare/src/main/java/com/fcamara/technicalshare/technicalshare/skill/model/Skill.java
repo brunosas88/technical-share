@@ -4,6 +4,7 @@ import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,7 @@ public class Skill {
     private String category;
 
    @ManyToMany(mappedBy = "expertiseList")
-   private List<Profile> profileExpertiseList;
+   private List<Profile> profileExpertiseList = new ArrayList<>();
 
    @ManyToMany(mappedBy = "interestsList")
    private List<Profile> profileInterestsList;

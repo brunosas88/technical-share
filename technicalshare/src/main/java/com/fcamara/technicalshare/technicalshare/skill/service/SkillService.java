@@ -18,8 +18,10 @@ public class SkillService {
 
     private final SkillRepository skillRepository;
 
-    public Skill registerProfileSkill(SkillDTO skillDTO){
-        return skillRepository.findSkillBySkill(skillDTO.getSkill());
+    public Skill registerProfileSkill(SkillDTO skillDTO, Profile newProfile){
+        Skill skillRegistered = skillRepository.findSkillBySkill(skillDTO.getSkill());
+        skillRegistered.getProfileExpertiseList().add(newProfile);
+        return skillRegistered;
     }
 
     public List<SkillDTO> registerSkill(List<SkillDTO> skillDTOList){
@@ -35,6 +37,10 @@ public class SkillService {
 
     public List<SkillDTO> getAllSkills() {
         return skillRepository.findAll().stream().map(SkillDTO::convertToDTO).collect(Collectors.toList());
+    }
+
+    public Skill getSkillBySkill(String skill){
+        return skillRepository.findSkillBySkill(skill);
     }
     
 }
