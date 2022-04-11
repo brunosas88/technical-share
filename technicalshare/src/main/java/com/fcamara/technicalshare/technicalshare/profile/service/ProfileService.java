@@ -13,10 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.query.JpaEntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,10 +28,6 @@ public class ProfileService {
     private final SkillService skillService;
     private final ProfessionService professionService;
     private final AcademicEducationService academicEducationService;
-
-    public ProfileDTO findProfile (String email) {
-        return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
-    }
 
     public ProfileDTO registerProfile(ProfileDTO profileDTO) {
 
@@ -47,11 +43,6 @@ public class ProfileService {
                 .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
                 .collect(Collectors.toList())
         );
-//        newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
-//                .stream()
-//                .map(newSkill -> skillService.registerProfileSkill(newSkill))
-//                .collect(Collectors.toList())
-//        );
         newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))
@@ -70,10 +61,24 @@ public class ProfileService {
         return profileRepository.findAll(pageable).map(ProfileDTO::convertToDTO);
     }
 
-    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, Pageable pageable) {
+    public ProfileDTO findProfile (String email) {
+        return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
+    }
+    public Page<ProfileDTO> findProfileByUserName (String name, Pageable pageable) {
+        return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
+    }
+
+    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, String filterXP, Pageable pageable) {
         Skill skill = skillService.getSkillBySkill(requiredSkill);
         List<ProfileDTO> profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
-        return toPage(profileDTOList, pageable);
+        if(Objects.equals(filterXP, null) ) {
+            return toPage(profileDTOList, pageable);
+        }
+        else {
+            List<ProfileDTO> profileDTOListFiltered = profileDTOList.stream().filter( profileDTO -> Objects.equals(profileDTO.getProfessionList().get(0).getExperienceLevel(),filterXP)).collect(Collectors.toList());
+            return toPage(profileDTOListFiltered, pageable);
+        }
+
     }
 
     private Page toPage(List list, Pageable pageable) {
@@ -87,5 +92,7 @@ public class ProfileService {
         List subList = list.subList(startIndex, endIndex);
         return new PageImpl(subList, pageable, list.size());
     }
+
+
 
 }

@@ -49,11 +49,21 @@ public class Profile {
     )
     private List<Skill> expertiseList = new ArrayList<>();
 
+
     @ManyToMany
     @JoinTable(
-            name = "profile_skill_interests",
+            name = "requisition_apprentice",
             joinColumns = {@JoinColumn(name = "id_profile")},
-            inverseJoinColumns = {@JoinColumn(name = "id_skill")}
+            inverseJoinColumns = {@JoinColumn(name = "id_requisition")}
     )
-    private List<Skill> interestsList = new ArrayList<>();
+    private List<Profile> mentoringListReceived = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "requisition_mentor",
+            joinColumns = {@JoinColumn(name = "id_profile")},
+            inverseJoinColumns = {@JoinColumn(name = "id_requisition")}
+    )
+    private List<Profile> mentoringListGiven = new ArrayList<>();
+
 }

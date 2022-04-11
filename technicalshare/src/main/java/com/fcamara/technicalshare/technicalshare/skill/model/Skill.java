@@ -18,7 +18,7 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "skill")
+    @Column(name = "skill", unique = true)
     private String skill;
 
     @Column(name = "area")
@@ -26,7 +26,4 @@ public class Skill {
 
     @ManyToMany(mappedBy = "expertiseList")
     private List<Profile> profileExpertiseList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "interestsList")
-    private List<Profile> profileInterestsList;
 }
