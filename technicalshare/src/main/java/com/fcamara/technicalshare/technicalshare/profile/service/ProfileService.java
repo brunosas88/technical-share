@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.query.JpaEntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +27,6 @@ public class ProfileService {
     private final SkillService skillService;
     private final ProfessionService professionService;
     private final AcademicEducationService academicEducationService;
-
-
 
     public ProfileDTO registerProfile(ProfileDTO profileDTO) {
 
@@ -92,5 +89,7 @@ public class ProfileService {
         List subList = list.subList(startIndex, endIndex);
         return new PageImpl(subList, pageable, list.size());
     }
+
+
 
 }
