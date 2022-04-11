@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,10 +73,17 @@ public class ProfileService {
         return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
     }
 
-    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, Pageable pageable) {
+    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, String filterXP, Pageable pageable) {
         Skill skill = skillService.getSkillBySkill(requiredSkill);
         List<ProfileDTO> profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
-        return toPage(profileDTOList, pageable);
+        if(Objects.equals(filterXP, null) ) {
+            return toPage(profileDTOList, pageable);
+        }
+        else {
+            List<ProfileDTO> profileDTOListFiltered = profileDTOList.stream().filter( profileDTO -> Objects.equals(profileDTO.getProfessionList().get(0).getExperienceLevel(),filterXP)).collect(Collectors.toList());
+            return toPage(profileDTOListFiltered, pageable);
+        }
+
     }
 
     private Page toPage(List list, Pageable pageable) {
