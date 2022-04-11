@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -86,6 +87,16 @@ public class ProfileService {
 
     }
 
+    public Page<ProfileDTO> fyndByMultipleSkills(String firstSkill, String secondSkill, Pageable pageable) {
+        List<String> emailProfileList = skillService.findByMultipleSkills(firstSkill, secondSkill);
+        List<ProfileDTO> profileList = new ArrayList<>();
+        emailProfileList.forEach(email -> {
+            profileList.add(findProfile(email));
+        });
+        return toPage(profileList, pageable);
+    }
+
+
     private Page toPage(List list, Pageable pageable) {
         if (pageable.getOffset() >= list.size()) {
             return Page.empty();
@@ -97,7 +108,4 @@ public class ProfileService {
         List subList = list.subList(startIndex, endIndex);
         return new PageImpl(subList, pageable, list.size());
     }
-
-
-
 }

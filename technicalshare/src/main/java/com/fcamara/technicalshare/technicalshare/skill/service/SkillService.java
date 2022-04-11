@@ -5,10 +5,12 @@ import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.repository.SkillRepository;
 
+import com.fcamara.technicalshare.technicalshare.skill.repository.projection.ProfileProjection;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +42,15 @@ public class SkillService {
 
     public Skill getSkillBySkill(String skill){
         return skillRepository.findSkillBySkill(skill);
+    }
+
+    public List<String> findByMultipleSkills(String firstSkill, String secondSkill) {
+        List<ProfileProjection> projections = skillRepository.findByMultipleSkill(firstSkill, secondSkill);
+        List<String> emailProfileList = new ArrayList<>();
+        projections.forEach( profileProjection -> {
+            emailProfileList.add(profileProjection.getEmail());
+        });
+        return emailProfileList;
     }
     
 }
