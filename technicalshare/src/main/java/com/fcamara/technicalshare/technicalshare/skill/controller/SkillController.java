@@ -4,9 +4,12 @@ import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
 
 @RestController
 @RequestMapping("/skill")
@@ -25,17 +28,13 @@ public class SkillController {
         return ResponseEntity.ok(skillService.getAllSkills());
     }
 
-    @DeleteMapping("/{skill}")
-	public void deleteSkillsBySkill(@PathVariable String skill) {
+    @Transactional
+    @DeleteMapping("/deletesingle")
+	public void deleteSkillsBySkill(@RequestParam String skill) {
 		skillService.deleteSkillsBySkill(skill);
 	}
 
-    @DeleteMapping("/{id}")
-	public void deleteById(@PathVariable Integer id) {
-		skillService.deleteById(id);
-	}
-
-    @DeleteMapping
+    @DeleteMapping("/deleteall")
 	public void deleteAllSkills() {
 		skillService.deleteAllSkills();
 	}
