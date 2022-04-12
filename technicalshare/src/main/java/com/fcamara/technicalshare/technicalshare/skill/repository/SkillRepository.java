@@ -28,4 +28,6 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
     )
     List<ProfileProjection> findByMultipleSkill(String firstSkill, String secondSkill);
 
+    void deleteSkillBySkill(String skill);
+
 }
