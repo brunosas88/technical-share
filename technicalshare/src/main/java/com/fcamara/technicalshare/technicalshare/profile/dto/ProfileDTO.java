@@ -4,6 +4,7 @@ import com.fcamara.technicalshare.technicalshare.academiceducation.dto.AcademicE
 import com.fcamara.technicalshare.technicalshare.links.dto.LinksDTO;
 import com.fcamara.technicalshare.technicalshare.profession.dto.ProfessionDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
+import com.fcamara.technicalshare.technicalshare.requisition.dto.RequisitionDTO;
 import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import lombok.*;
 
@@ -25,6 +26,8 @@ public class ProfileDTO {
     private List<SkillDTO> expertiseList = new ArrayList<>();
     private List<ProfessionDTO> professionList = new ArrayList<>();
     private List<AcademicEducationDTO> academicEducationList = new ArrayList<>();
+    private List<RequisitionDTO> mentoringListReceived = new ArrayList<>();
+    private List<RequisitionDTO> mentoringListGiven = new ArrayList<>();
 
     public static ProfileDTO convertToDTO (Profile Profile) {
         ProfileDTO dto = new ProfileDTO();
@@ -47,7 +50,14 @@ public class ProfileDTO {
                .stream()
                .map(AcademicEducationDTO::convertToDTO)
                .collect(Collectors.toList());
-
+       dto.mentoringListGiven = Profile.getMentoringListGiven()
+               .stream()
+               .map(RequisitionDTO::convertToDTO)
+               .collect(Collectors.toList());
+        dto.mentoringListReceived = Profile.getMentoringListReceived()
+                .stream()
+                .map(RequisitionDTO::convertToDTO)
+                .collect(Collectors.toList());
         return dto;
     }
 

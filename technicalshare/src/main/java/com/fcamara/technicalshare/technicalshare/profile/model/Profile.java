@@ -3,6 +3,7 @@ package com.fcamara.technicalshare.technicalshare.profile.model;
 import com.fcamara.technicalshare.technicalshare.academiceducation.model.AcademicEducation;
 import com.fcamara.technicalshare.technicalshare.links.model.Links;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
+import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,7 +57,7 @@ public class Profile {
             joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_requisition")}
     )
-    private List<Profile> mentoringListReceived = new ArrayList<>();
+    private List<Requisition> mentoringListReceived = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -64,6 +65,6 @@ public class Profile {
             joinColumns = {@JoinColumn(name = "id_profile")},
             inverseJoinColumns = {@JoinColumn(name = "id_requisition")}
     )
-    private List<Profile> mentoringListGiven = new ArrayList<>();
+    private List<Requisition> mentoringListGiven = new ArrayList<>();
 
 }

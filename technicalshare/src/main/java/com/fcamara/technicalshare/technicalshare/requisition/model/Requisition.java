@@ -1,10 +1,8 @@
 package com.fcamara.technicalshare.technicalshare.requisition.model;
 
+import com.fcamara.technicalshare.technicalshare.contact.model.Contact;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "requisition")
 public class Requisition {
 
@@ -24,8 +23,14 @@ public class Requisition {
     @Column(name = "username")
     private String userName;
 
+    @Column(name = "user_email")
+    private String userEmail;
+
     @Column(name = "required_username")
     private String requiredUserName;
+
+    @Column(name = "required_user_email")
+    private String requiredUserEmail;
 
     @Column(name = "subject")
     private String subject;
@@ -44,4 +49,7 @@ public class Requisition {
 
     @ManyToMany(mappedBy = "mentoringListGiven")
     private List<Profile> mentorList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "requisition")
+    private List<Contact> contactList = new ArrayList<>();
 }
