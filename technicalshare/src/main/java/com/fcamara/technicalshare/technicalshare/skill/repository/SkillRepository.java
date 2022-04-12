@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
     Skill findSkillBySkill(String skill);
+
+    void deleteSkillBySkill(String skill);
 }

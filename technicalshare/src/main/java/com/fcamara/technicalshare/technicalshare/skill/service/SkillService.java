@@ -41,5 +41,14 @@ public class SkillService {
     public Skill getSkillBySkill(String skill){
         return skillRepository.findSkillBySkill(skill);
     }
+
+    public void deleteSkillsBySkill(String skill) {
+        skillRepository.deleteSkillBySkill(skill);
+    }
+
+    public void deleteAllSkills() {
+        skillRepository.deleteAll();
+    }
+
     
 }
