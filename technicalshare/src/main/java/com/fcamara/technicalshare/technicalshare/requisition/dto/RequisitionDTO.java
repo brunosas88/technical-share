@@ -1,15 +1,7 @@
 package com.fcamara.technicalshare.technicalshare.requisition.dto;
 
-import com.fcamara.technicalshare.technicalshare.academiceducation.dto.AcademicEducationDTO;
-import com.fcamara.technicalshare.technicalshare.links.dto.LinksDTO;
-import com.fcamara.technicalshare.technicalshare.profession.dto.ProfessionDTO;
-import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
-import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
+import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -24,7 +16,6 @@ public class RequisitionDTO {
     private String keyWords;
     private Boolean urgency;
     private String message;
-    
 
     private static RequisitionDTO convertToDTO(Requisition requisition) {
         RequisitionDTO dto = new RequisitionDTO();
@@ -36,3 +27,4 @@ public class RequisitionDTO {
         dto.setMessage(requisition.getMessage());
         return dto;
     }
+}
