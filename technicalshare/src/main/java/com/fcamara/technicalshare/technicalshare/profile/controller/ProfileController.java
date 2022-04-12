@@ -38,13 +38,8 @@ public class ProfileController {
 	}
 
     @GetMapping("/findbyskill")
-    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@RequestParam String skill,  @Nullable @RequestParam String filterXP, @Nullable Pageable pageable) {
-        return ResponseEntity.ok(profileService.getProfileBySkill(skill, filterXP, pageable));
-    }
-
-    @GetMapping("/findbymultipleskills")
-    public ResponseEntity<Page<ProfileDTO>> findProfilesByMultipleSkills (@RequestParam String firstSkill, @RequestParam String secondSkill, @Nullable Pageable pageable) {
-        return ResponseEntity.ok(profileService.fyndByMultipleSkills(firstSkill, secondSkill, pageable));
+    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@Nullable @RequestParam String firstSkill, @Nullable @RequestParam String secondSkill, @Nullable @RequestParam String filterXP, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findProfilesBySkill(firstSkill, secondSkill, filterXP, pageable));
     }
 
 }

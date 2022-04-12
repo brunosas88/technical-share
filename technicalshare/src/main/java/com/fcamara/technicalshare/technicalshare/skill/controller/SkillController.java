@@ -16,15 +16,14 @@ public class SkillController {
     private final SkillService skillService;
 
     @PostMapping
-    public ResponseEntity<List<SkillDTO>> registerSkill (@RequestBody List<SkillDTO> skillDTOList) {
+    public ResponseEntity<List<SkillDTO>> registerSkill(@RequestBody List<SkillDTO> skillDTOList) {
         return ResponseEntity.ok(skillService.registerSkill(skillDTOList));
     }
 
     @GetMapping
-    public ResponseEntity<List<SkillDTO>> getAllSkills () {
+    public ResponseEntity<List<SkillDTO>> getAllSkills() {
         return ResponseEntity.ok(skillService.getAllSkills());
     }
-
 
     @DeleteMapping("/deletesingle")
     public void deleteSkillsBySkill(@RequestParam String skill) {

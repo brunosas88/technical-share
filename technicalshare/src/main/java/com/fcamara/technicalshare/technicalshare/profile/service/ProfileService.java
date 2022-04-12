@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.fcamara.technicalshare.technicalshare.utils.GlobalVariables.NULL_VALUE;
+
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
@@ -76,26 +78,32 @@ public class ProfileService {
         return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
     }
 
-    public Page<ProfileDTO> getProfileBySkill(String requiredSkill, String filterXP, Pageable pageable) {
-        Skill skill = skillService.getSkillBySkill(requiredSkill);
-        List<ProfileDTO> profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
-        if(Objects.equals(filterXP, null) ) {
-            return toPage(profileDTOList, pageable);
+    public Page<ProfileDTO> findProfilesBySkill(String firstSkill, String secondSkill, String filterXP, Pageable pageable) {
+
+        List<ProfileDTO> profileDTOList = new ArrayList<>();
+
+        if( (Objects.equals(firstSkill,NULL_VALUE) && Objects.equals(secondSkill,NULL_VALUE)) || (Objects.equals(firstSkill,null) && Objects.equals(secondSkill,null))) {
+            return findAllProfile(pageable);
+        } else if(Objects.equals(firstSkill,NULL_VALUE) || Objects.equals(firstSkill,null)) {
+            Skill skill = skillService.getSkillBySkill(secondSkill);
+            profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+        } else if(Objects.equals(secondSkill,NULL_VALUE) || Objects.equals(secondSkill,null)) {
+            Skill skill = skillService.getSkillBySkill(firstSkill);
+            profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+        } else {
+            List<String> emailProfileList = skillService.findByMultipleSkills(firstSkill, secondSkill);
+            for ( String email : emailProfileList  ) {
+                profileDTOList.add(findProfile(email));
+            }
         }
-        else {
+
+        if( Objects.equals(filterXP, NULL_VALUE) || Objects.equals(filterXP, null) ) {
+            return toPage(profileDTOList, pageable);
+        } else {
             List<ProfileDTO> profileDTOListFiltered = profileDTOList.stream().filter( profileDTO -> Objects.equals(profileDTO.getProfessionList().get(0).getExperienceLevel(),filterXP)).collect(Collectors.toList());
             return toPage(profileDTOListFiltered, pageable);
         }
 
-    }
-
-    public Page<ProfileDTO> fyndByMultipleSkills(String firstSkill, String secondSkill, Pageable pageable) {
-        List<String> emailProfileList = skillService.findByMultipleSkills(firstSkill, secondSkill);
-        List<ProfileDTO> profileList = new ArrayList<>();
-        emailProfileList.forEach(email -> {
-            profileList.add(findProfile(email));
-        });
-        return toPage(profileList, pageable);
     }
 
     private Page toPage(List list, Pageable pageable) {
