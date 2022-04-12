@@ -15,7 +15,7 @@ public class ProfessionDTO {
 
     private String occupation;
     private String description;
-    private ExperienceLevelEnum experienceLevel;
+    private String experienceLevel;
     private LocalDate startDate;
     private LocalDate finalDate;
 
