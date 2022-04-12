@@ -26,7 +26,7 @@ public class RequisitionDTO {
     private String message;
     private List<ContactDTO> contactList = new ArrayList<>();
 
-    private static RequisitionDTO convertToDTO(Requisition requisition) {
+    public static RequisitionDTO convertToDTO(Requisition requisition) {
         RequisitionDTO dto = new RequisitionDTO();
         dto.setUserName(requisition.getUserName());
         dto.setUserEmail(requisition.getUserEmail());
@@ -41,7 +41,7 @@ public class RequisitionDTO {
         return dto;
     }
 
-    private static Requisition convertToModel(RequisitionDTO dto) {
+    public static Requisition convertToModel(RequisitionDTO dto) {
         Requisition model = new Requisition();
         model.setUserName(dto.getUserName());
         model.setUserEmail(dto.getUserEmail());

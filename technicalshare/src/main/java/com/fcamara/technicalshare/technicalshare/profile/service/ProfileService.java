@@ -6,6 +6,7 @@ import com.fcamara.technicalshare.technicalshare.profession.service.ProfessionSe
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.profile.repository.ProfileRepository;
+import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
@@ -70,6 +71,7 @@ public class ProfileService {
     public ProfileDTO findProfile (String email) {
         return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
     }
+
     public Page<ProfileDTO> findProfileByUserName (String name, Pageable pageable) {
         return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
     }
@@ -96,7 +98,6 @@ public class ProfileService {
         return toPage(profileList, pageable);
     }
 
-
     private Page toPage(List list, Pageable pageable) {
         if (pageable.getOffset() >= list.size()) {
             return Page.empty();
@@ -107,5 +108,14 @@ public class ProfileService {
                 pageable.getOffset() + pageable.getPageSize());
         List subList = list.subList(startIndex, endIndex);
         return new PageImpl(subList, pageable, list.size());
+    }
+
+    public void registerRequisitionProfile(Requisition requisition) {
+        Profile user = profileRepository.findProfileByEmail(requisition.getUserEmail());
+        user.getMentoringListReceived().add(requisition);
+        profileRepository.save(user);
+        Profile requiredUser = profileRepository.findProfileByEmail(requisition.getRequiredUserEmail());
+        requiredUser.getMentoringListGiven().add(requisition);
+        profileRepository.save(requiredUser);
     }
 }
