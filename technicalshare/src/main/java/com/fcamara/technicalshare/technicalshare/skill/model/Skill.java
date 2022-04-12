@@ -26,7 +26,4 @@ public class Skill {
 
     @ManyToMany(mappedBy = "expertiseList")
     private List<Profile> profileExpertiseList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "interestsList")
-    private List<Profile> profileInterestsList;
 }

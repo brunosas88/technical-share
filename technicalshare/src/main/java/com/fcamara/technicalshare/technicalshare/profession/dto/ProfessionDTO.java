@@ -1,5 +1,6 @@
 package com.fcamara.technicalshare.technicalshare.profession.dto;
 
+import com.fcamara.technicalshare.technicalshare.profession.model.ExperienceLevelEnum;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import lombok.*;
 
@@ -14,7 +15,7 @@ public class ProfessionDTO {
 
     private String occupation;
     private String description;
-    private String experienceLevel;
+    private ExperienceLevelEnum experienceLevel;
     private LocalDate startDate;
     private LocalDate finalDate;
 

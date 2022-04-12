@@ -36,8 +36,9 @@ public class Profession {
 	@Column(name="description")
 	private String description;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name="experience_level")
-	private String experienceLevel;
+	private ExperienceLevelEnum experienceLevel;
 
 	@ManyToOne
 	@JoinColumn(name = "id_profile")

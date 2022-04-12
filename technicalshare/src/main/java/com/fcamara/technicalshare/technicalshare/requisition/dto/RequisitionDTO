@@ -1,0 +1,38 @@
+package com.fcamara.technicalshare.technicalshare.requisition.dto;
+
+import com.fcamara.technicalshare.technicalshare.academiceducation.dto.AcademicEducationDTO;
+import com.fcamara.technicalshare.technicalshare.links.dto.LinksDTO;
+import com.fcamara.technicalshare.technicalshare.profession.dto.ProfessionDTO;
+import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
+import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class RequisitionDTO {
+
+    private String userName;
+    private String requiredUserName;
+    private String subject;
+    private String keyWords;
+    private Boolean urgency;
+    private String message;
+    
+
+    private static RequisitionDTO convertToDTO(Requisition requisition) {
+        RequisitionDTO dto = new RequisitionDTO();
+        dto.setUserName(requisition.getUserName());
+        dto.setRequiredUserName(requisition.getRequiredUserName());
+        dto.setSubject(requisition.getSubject());
+        dto.setKeyWords(requisition.getKeyWords());
+        dto.setUrgency(requisition.getUrgency());
+        dto.setMessage(requisition.getMessage());
+        return dto;
+    }
