@@ -50,5 +50,9 @@ public class SkillService {
         skillRepository.deleteAll();
     }
 
+    public void deleteById(Integer id) {
+        skillRepository.deleteById(id);
+    }
+
     
 }

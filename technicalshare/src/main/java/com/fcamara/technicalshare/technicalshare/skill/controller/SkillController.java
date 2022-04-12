@@ -30,6 +30,11 @@ public class SkillController {
 		skillService.deleteSkillsBySkill(skill);
 	}
 
+    @DeleteMapping("/{id}")
+	public void deleteById(@PathVariable String skill) {
+		skillService.deleteById(skill);
+	}
+
     @DeleteMapping
 	public void deleteAllSkills() {
 		skillService.deleteAllSkills();
