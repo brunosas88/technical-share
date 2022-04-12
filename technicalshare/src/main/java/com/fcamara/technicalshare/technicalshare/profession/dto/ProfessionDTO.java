@@ -1,6 +1,5 @@
 package com.fcamara.technicalshare.technicalshare.profession.dto;
 
-import com.fcamara.technicalshare.technicalshare.profession.model.ExperienceLevelEnum;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import lombok.*;
 

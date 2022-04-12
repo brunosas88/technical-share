@@ -1,6 +1,5 @@
 package com.fcamara.technicalshare.technicalshare.skill.repository;
 
-import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.repository.projection.ProfileProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
