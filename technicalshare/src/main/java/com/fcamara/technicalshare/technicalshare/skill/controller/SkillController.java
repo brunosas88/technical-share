@@ -27,6 +27,7 @@ public class SkillController {
         return ResponseEntity.ok(skillService.getAllSkills());
     }
 
+
     @DeleteMapping("/deletesingle")
 	public void deleteSkillsBySkill(@RequestParam String skill) {
 		skillService.deleteSkillsBySkill(skill);
