@@ -9,6 +9,7 @@ import com.fcamara.technicalshare.technicalshare.skill.repository.projection.Pro
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class SkillService {
         return emailProfileList;
     }
 
+    @Transactional
     public void deleteSkillsBySkill(String skill) {
         skillRepository.deleteSkillBySkill(skill);
     }
@@ -61,9 +63,4 @@ public class SkillService {
         skillRepository.deleteAll();
     }
 
-    public void deleteById(Integer id) {
-        skillRepository.deleteById(id);
-    }
-
-    
 }

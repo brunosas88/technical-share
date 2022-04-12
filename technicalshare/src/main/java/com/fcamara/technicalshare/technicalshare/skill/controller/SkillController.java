@@ -25,19 +25,15 @@ public class SkillController {
         return ResponseEntity.ok(skillService.getAllSkills());
     }
 
-    @DeleteMapping("/{skill}")
-	public void deleteSkillsBySkill(@PathVariable String skill) {
-		skillService.deleteSkillsBySkill(skill);
-	}
 
-    @DeleteMapping("/{id}")
-	public void deleteById(@PathVariable Integer id) {
-		skillService.deleteById(id);
-	}
+    @DeleteMapping("/deletesingle")
+    public void deleteSkillsBySkill(@RequestParam String skill) {
+        skillService.deleteSkillsBySkill(skill);
+    }
 
-    @DeleteMapping
-	public void deleteAllSkills() {
-		skillService.deleteAllSkills();
-	}
+    @DeleteMapping("/deleteall")
+    public void deleteAllSkills() {
+        skillService.deleteAllSkills();
+    }
 
 }
