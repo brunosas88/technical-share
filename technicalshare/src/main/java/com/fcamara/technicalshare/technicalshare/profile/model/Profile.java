@@ -33,6 +33,10 @@ public class Profile {
     @Column(name = "bio")
     private String bio;
 
+    @Lob
+    @Column(name = "image")
+    private String image;
+
     @OneToMany( mappedBy = "profileLink")
     private List<Links> linksList = new ArrayList<>();
 
@@ -66,5 +70,7 @@ public class Profile {
             inverseJoinColumns = {@JoinColumn(name = "id_requisition")}
     )
     private List<Requisition> mentoringListGiven = new ArrayList<>();
+
+
 
 }

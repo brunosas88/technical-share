@@ -34,7 +34,7 @@ public class ProfileController {
         return ResponseEntity.ok(profileService.findProfile(email));
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
 	public ResponseEntity<ProfileDTO> registerProfile(@Valid @RequestBody ProfileDTO profileDTO){
 		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
 	}

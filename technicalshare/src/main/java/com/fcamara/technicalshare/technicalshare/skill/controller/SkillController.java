@@ -29,10 +29,4 @@ public class SkillController {
     public void deleteSkillsBySkill(@RequestParam String skill) {
         skillService.deleteSkillsBySkill(skill);
     }
-
-    @DeleteMapping("/deleteall")
-    public void deleteAllSkills() {
-        skillService.deleteAllSkills();
-    }
-
 }

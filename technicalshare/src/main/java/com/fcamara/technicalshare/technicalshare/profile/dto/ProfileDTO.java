@@ -25,6 +25,7 @@ public class ProfileDTO {
     @NotBlank
     private String email;
     private String bio;
+    private String image;
     private List<LinksDTO> linksListDTO = new ArrayList<>();
     private List<SkillDTO> expertiseList = new ArrayList<>();
     private List<ProfessionDTO> professionList = new ArrayList<>();
@@ -37,6 +38,7 @@ public class ProfileDTO {
         dto.setUserName(Profile.getUserName());
         dto.setEmail(Profile.getEmail());
         dto.setBio(Profile.getBio());
+        dto.setImage(Profile.getImage());
         dto.linksListDTO = Profile.getLinksList()
                 .stream()
                 .map(LinksDTO::convertToDTO)
@@ -69,6 +71,7 @@ public class ProfileDTO {
         model.setUserName(profileDTO.getUserName());
         model.setEmail(profileDTO.getEmail());
         model.setBio(profileDTO.getBio());
+        model.setImage(profileDTO.getImage());
         return model;
     }
 }
