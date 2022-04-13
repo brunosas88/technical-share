@@ -1,11 +1,9 @@
 package com.fcamara.technicalshare.technicalshare.skill.repository;
 
-import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.repository.projection.ProfileProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
