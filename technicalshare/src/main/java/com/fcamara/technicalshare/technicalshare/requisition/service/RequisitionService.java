@@ -29,4 +29,11 @@ public class RequisitionService {
         profileService.registerRequisitionProfile(newRequisition);
     }
 
+    public void deleteRequisition(Integer idRequisition, String emailRemoveRequest) {
+        Requisition toBeRemovedRequisition = requisitionRepository.findById(idRequisition).orElseThrow(NullPointerException::new);
+        profileService.deleteRequisitionProfile(toBeRemovedRequisition, emailRemoveRequest);
+    }
+
+
+
 }

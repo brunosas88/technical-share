@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @ToString
 public class RequisitionDTO {
 
+    private Integer id;
     private String userName;
     @NotBlank
     private String userEmail;
@@ -30,6 +31,7 @@ public class RequisitionDTO {
 
     public static RequisitionDTO convertToDTO(Requisition requisition) {
         RequisitionDTO dto = new RequisitionDTO();
+        dto.setId(requisition.getId());
         dto.setUserName(requisition.getUserName());
         dto.setUserEmail(requisition.getUserEmail());
         dto.setRequiredUserName(requisition.getRequiredUserName());

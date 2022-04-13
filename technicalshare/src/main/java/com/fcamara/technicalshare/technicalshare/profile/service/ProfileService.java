@@ -49,11 +49,6 @@ public class ProfileService {
                 .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
                 .collect(Collectors.toList())
         );
-//        newProfile.getInterestsList().addAll(profileDTO.getInterestsList()
-//                .stream()
-//                .map(newSkill -> skillService.registerProfileSkill(newSkill))
-//                .collect(Collectors.toList())
-//        );
         newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))
@@ -128,4 +123,20 @@ public class ProfileService {
         requiredUser.getMentoringListGiven().add(requisition);
         profileRepository.save(requiredUser);
     }
+
+    public void deleteRequisitionProfile(Requisition toBeRemovedRequisition, String emailRemoveRequest) {
+
+        if (Objects.equals(emailRemoveRequest, toBeRemovedRequisition.getUserEmail())) {
+            Profile user = profileRepository.findProfileByEmail(emailRemoveRequest);
+            user.getMentoringListReceived().remove(toBeRemovedRequisition);
+            profileRepository.save(user);
+        } else if (Objects.equals(emailRemoveRequest, toBeRemovedRequisition.getRequiredUserEmail())) {
+            Profile requiredUser = profileRepository.findProfileByEmail(emailRemoveRequest);
+            requiredUser.getMentoringListGiven().remove(toBeRemovedRequisition);
+            profileRepository.save(requiredUser);
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
 }
