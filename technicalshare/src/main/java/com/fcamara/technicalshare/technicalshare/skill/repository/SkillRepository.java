@@ -32,7 +32,4 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
     void deleteSkillBySkill(String skill);
 
-
-    Skill updateSkill(String skill);
-
 }
