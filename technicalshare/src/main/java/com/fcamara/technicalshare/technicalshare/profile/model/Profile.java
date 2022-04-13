@@ -33,7 +33,6 @@ public class Profile {
     @Column(name = "bio")
     private String bio;
 
-    @Lob
     @Column(name = "image")
     private String image;
 
@@ -53,7 +52,6 @@ public class Profile {
             inverseJoinColumns = {@JoinColumn(name = "id_skill")}
     )
     private List<Skill> expertiseList = new ArrayList<>();
-
 
     @ManyToMany
     @JoinTable(
