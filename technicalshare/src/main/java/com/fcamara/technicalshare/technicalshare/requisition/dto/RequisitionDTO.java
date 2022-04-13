@@ -1,10 +1,10 @@
 package com.fcamara.technicalshare.technicalshare.requisition.dto;
 
 import com.fcamara.technicalshare.technicalshare.contact.dto.ContactDTO;
-import com.fcamara.technicalshare.technicalshare.contact.model.Contact;
 import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +17,10 @@ import java.util.stream.Collectors;
 public class RequisitionDTO {
 
     private String userName;
+    @NotBlank
     private String userEmail;
     private String requiredUserName;
+    @NotBlank
     private String requiredUserEmail;
     private String subject;
     private String keyWords;

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/profiles")
 @RequiredArgsConstructor
@@ -33,7 +35,7 @@ public class ProfileController {
     }
 
     @PostMapping("register")
-	public ResponseEntity<ProfileDTO> registerProfile(@RequestBody ProfileDTO profileDTO){
+	public ResponseEntity<ProfileDTO> registerProfile(@Valid @RequestBody ProfileDTO profileDTO){
 		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
 	}
 

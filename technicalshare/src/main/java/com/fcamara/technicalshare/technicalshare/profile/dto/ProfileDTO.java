@@ -8,6 +8,7 @@ import com.fcamara.technicalshare.technicalshare.requisition.dto.RequisitionDTO;
 import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,9 @@ import java.util.stream.Collectors;
 @ToString
 public class ProfileDTO {
 
+    @NotBlank
     private String userName;
+    @NotBlank
     private String email;
     private String bio;
     private List<LinksDTO> linksListDTO = new ArrayList<>();
