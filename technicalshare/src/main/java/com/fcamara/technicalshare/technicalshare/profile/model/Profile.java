@@ -33,7 +33,6 @@ public class Profile {
     @Column(name = "bio")
     private String bio;
 
-    @Lob
     @Column(name = "image")
     private String image;
 

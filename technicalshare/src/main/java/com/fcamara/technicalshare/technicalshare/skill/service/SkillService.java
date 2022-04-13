@@ -62,5 +62,7 @@ public class SkillService {
     public void deleteAllSkills() {
         skillRepository.deleteAll();
     }
+
+
     
 }
