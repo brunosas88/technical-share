@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/requisitions")
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class RequisitionController {
 
     @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping
-    public void deleteRequisition(@RequestParam Integer idRequisition,@RequestParam String emailRemoveRequest) {
-        requisitionService.deleteRequisition(idRequisition, emailRemoveRequest);
+    public void deleteRequisition(@RequestParam UUID uuidRequisition, @RequestParam String emailRemoveRequest) {
+        requisitionService.deleteRequisition(uuidRequisition, emailRemoveRequest);
     }
 }

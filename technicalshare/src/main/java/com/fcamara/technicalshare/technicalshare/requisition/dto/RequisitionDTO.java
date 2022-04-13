@@ -7,6 +7,7 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @ToString
 public class RequisitionDTO {
 
-    private Integer id;
+    private UUID uuidRequisition;
     private String userName;
     @NotBlank
     private String userEmail;
@@ -31,7 +32,7 @@ public class RequisitionDTO {
 
     public static RequisitionDTO convertToDTO(Requisition requisition) {
         RequisitionDTO dto = new RequisitionDTO();
-        dto.setId(requisition.getId());
+        dto.setUuidRequisition(requisition.getUuidRequisition());
         dto.setUserName(requisition.getUserName());
         dto.setUserEmail(requisition.getUserEmail());
         dto.setRequiredUserName(requisition.getRequiredUserName());
@@ -45,8 +46,9 @@ public class RequisitionDTO {
         return dto;
     }
 
-    public static Requisition convertToModel(RequisitionDTO dto) {
+    public static Requisition convertToNewModel(RequisitionDTO dto) {
         Requisition model = new Requisition();
+        model.setUuidRequisition(UUID.randomUUID());
         model.setUserName(dto.getUserName());
         model.setUserEmail(dto.getUserEmail());
         model.setRequiredUserName(dto.getRequiredUserName());

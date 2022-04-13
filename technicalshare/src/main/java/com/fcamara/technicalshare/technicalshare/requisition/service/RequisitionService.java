@@ -8,6 +8,7 @@ import com.fcamara.technicalshare.technicalshare.requisition.repository.Requisit
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +20,7 @@ public class RequisitionService {
     private final ContactService contactService;
 
     public void registerRequisition(RequisitionDTO requisitionDTO) {
-        Requisition newRequisition = requisitionRepository.save(RequisitionDTO.convertToModel(requisitionDTO));
+        Requisition newRequisition = requisitionRepository.save(RequisitionDTO.convertToNewModel(requisitionDTO));
 
         newRequisition.getContactList().addAll(requisitionDTO.getContactList()
                 .stream()
@@ -29,8 +30,8 @@ public class RequisitionService {
         profileService.registerRequisitionProfile(newRequisition);
     }
 
-    public void deleteRequisition(Integer idRequisition, String emailRemoveRequest) {
-        Requisition toBeRemovedRequisition = requisitionRepository.findById(idRequisition).orElseThrow(NullPointerException::new);
+    public void deleteRequisition(UUID uuidRequisition, String emailRemoveRequest) {
+        Requisition toBeRemovedRequisition = requisitionRepository.findRequisitionByUuidRequisition(uuidRequisition);
         profileService.deleteRequisitionProfile(toBeRemovedRequisition, emailRemoveRequest);
     }
 
