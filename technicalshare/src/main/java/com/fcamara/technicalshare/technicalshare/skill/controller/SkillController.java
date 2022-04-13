@@ -4,6 +4,7 @@ import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,10 @@ public class SkillController {
     @DeleteMapping("/deletesingle")
     public void deleteSkillsBySkill(@RequestParam String skill) {
         skillService.deleteSkillsBySkill(skill);
+    }
+
+    @PatchMapping("update")
+    public ResponseEntity<SkillDTO> updateSkill(@RequestParam String toChangeSkill, @Nullable @RequestParam String newSkillName, @Nullable @RequestParam String newAreaName ) {
+        return ResponseEntity.ok(skillService.updateSkill(toChangeSkill, newSkillName, newAreaName));
     }
 }

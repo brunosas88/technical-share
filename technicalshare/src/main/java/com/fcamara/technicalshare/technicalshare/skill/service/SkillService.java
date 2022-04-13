@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,10 +60,22 @@ public class SkillService {
         skillRepository.deleteSkillBySkill(skill);
     }
 
-    public void deleteAllSkills() {
-        skillRepository.deleteAll();
+
+    public SkillDTO updateSkill(String toChangeSkill, String newSkillName, String newAreaName) {
+        Skill toUpdateSkill = getSkillBySkill(toChangeSkill);
+
+        if(Objects.equals(newSkillName, null) && Objects.equals(newAreaName, null)) {
+            throw new NullPointerException();
+        } else if(Objects.equals(newSkillName, null)) {
+            toUpdateSkill.setArea(newAreaName);
+            return SkillDTO.convertToDTO(skillRepository.save(toUpdateSkill));
+        } else if(Objects.equals(newAreaName, null)) {
+            toUpdateSkill.setSkill(newSkillName);
+            return SkillDTO.convertToDTO(skillRepository.save(toUpdateSkill));
+        } else {
+            toUpdateSkill.setArea(newAreaName);
+            toUpdateSkill.setSkill(newSkillName);
+            return SkillDTO.convertToDTO(skillRepository.save(toUpdateSkill));
+        }
     }
-
-
-    
 }
