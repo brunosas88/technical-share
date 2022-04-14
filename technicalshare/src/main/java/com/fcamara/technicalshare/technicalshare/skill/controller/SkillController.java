@@ -13,12 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/skill")
 @RequiredArgsConstructor
-//@SecurityRequirement(name = "security")
 public class SkillController {
 
     private final SkillService skillService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<List<SkillDTO>> registerSkill(@RequestBody List<SkillDTO> skillDTOList) {
         return ResponseEntity.ok(skillService.registerSkill(skillDTOList));
     }

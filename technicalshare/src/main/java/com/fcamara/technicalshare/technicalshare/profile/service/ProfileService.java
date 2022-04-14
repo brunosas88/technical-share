@@ -14,6 +14,7 @@ import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
+import com.fcamara.technicalshare.technicalshare.user.dto.UserResponseDTO;
 import com.fcamara.technicalshare.technicalshare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,14 +42,15 @@ public class ProfileService {
     private final UserService userService;
 
     @Transactional
-    public ProfileDTO registerProfile(ProfileRegisterRequestDTO profileRegisterRequestDTO) {
+    public UserResponseDTO registerProfile(ProfileRegisterRequestDTO profileRegisterRequestDTO) {
         Profile newProfile = profileRepository.save(ProfileRegisterRequestDTO.convertToProfileModel(profileRegisterRequestDTO));
         newProfile.getLinksList().addAll(registerProfileLinks(profileRegisterRequestDTO, newProfile));
         newProfile.getExpertiseList().addAll(registerProfileSkills(profileRegisterRequestDTO, newProfile));
         newProfile.getProfessionList().addAll(registerProfileProfessions(profileRegisterRequestDTO, newProfile));
         newProfile.getAcademicEducationList().addAll(registerProfileAcademics(profileRegisterRequestDTO, newProfile));
         userService.registerUser(ProfileRegisterRequestDTO.convertToUserDTO(profileRegisterRequestDTO), newProfile);
-        return ProfileDTO.convertToDTO(newProfile);
+
+        return new UserResponseDTO(userService.getAuthentication(newProfile.getUserName(), newProfile.getEmail()), newProfile.getEmail());
     }
 
     private List<AcademicEducation> registerProfileAcademics(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {

@@ -34,18 +34,23 @@ public class UserService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User newUser = userRepository.save(UserDTO.convertToModel(userDTO, newProfile));
         userDTO.getRoles().forEach(roles -> authorityService.saveAuthority(newUser, roles));
+
     }
 
     public UserResponseDTO login(UserLoginDTO userLoginDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         Optional<User> userBD = Optional.of(userRepository.findByUserName(userLoginDTO.getUserName()).orElseThrow(() -> new NullPointerException("Usuário não encontrado")));
         if ( (userBD.isPresent()) && (encoder.matches(userLoginDTO.getPassword(), userBD.get().getPassword())) ){
-            String authentication = userBD.get().getUserName() + ":" + userBD.get().getPassword();
-            byte[] encodedAuthentication = Base64.encodeBase64(authentication.getBytes(Charset.forName("US-ASCII")));
-            String headerAuthentication = "Basic " + new String(encodedAuthentication);
+            String headerAuthentication = getAuthentication(userLoginDTO.getUserName(), userLoginDTO.getPassword());
             return new UserResponseDTO(headerAuthentication, userLoginDTO.getUserName());
         } else {
             throw new NullPointerException("Senha inválida");
         }
+    }
+
+    public String getAuthentication(String userName, String password) {
+        String authentication = userName + ":" + password;
+        byte[] encodedAuthentication = Base64.encodeBase64(authentication.getBytes(Charset.forName("US-ASCII")));
+        return "Basic " + new String(encodedAuthentication);
     }
 }

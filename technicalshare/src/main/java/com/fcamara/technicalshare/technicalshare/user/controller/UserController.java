@@ -17,7 +17,6 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-//@SecurityRequirement(name = "security")
 public class UserController {
 
     private final UserService userService;
