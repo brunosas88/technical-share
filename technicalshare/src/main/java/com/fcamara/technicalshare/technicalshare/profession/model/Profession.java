@@ -8,12 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter 
+import java.time.LocalDate;
+
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="professional")
+@ToString
+@Entity(name="profession")
 public class Profession {
 
 	@Id
@@ -23,18 +27,21 @@ public class Profession {
 	@Column(name="occupation")
 	private String occupation;
 
-	@Column(name="duration")
-	private Integer duration;
+	@Column(name="start_date")
+	private LocalDate startDate;
+
+	@Column(name="final_date")
+	private LocalDate finalDate;
 
 	@Column(name="description")
 	private String description;
+
 
 	@Column(name="experience_level")
 	private String experienceLevel;
 
 	@ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_profile")
 	private Profile profileProfession;
-	
 
 }

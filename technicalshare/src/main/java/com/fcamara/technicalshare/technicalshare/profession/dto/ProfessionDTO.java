@@ -3,22 +3,26 @@ package com.fcamara.technicalshare.technicalshare.profession.dto;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ResponseProfessionDTO {
+public class ProfessionDTO {
 
     private String occupation;
-    private Integer duration;
     private String description;
     private String experienceLevel;
+    private LocalDate startDate;
+    private LocalDate finalDate;
 
-    public static ResponseProfessionDTO convertToDTO(Profession profession) {
-        ResponseProfessionDTO dto = new ResponseProfessionDTO();
+    public static ProfessionDTO convertToDTO(Profession profession) {
+        ProfessionDTO dto = new ProfessionDTO();
         dto.setOccupation(profession.getOccupation());
-        dto.setDuration(profession.getDuration());
+        dto.setStartDate(profession.getStartDate());
+        dto.setFinalDate(profession.getFinalDate());
         dto.setDescription(profession.getDescription());
         dto.setExperienceLevel(profession.getExperienceLevel());
 

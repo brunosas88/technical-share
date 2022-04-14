@@ -5,15 +5,14 @@ import java.time.LocalDate;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter 
+import lombok.*;
+
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name="academic_education")
 public class AcademicEducation {
 
@@ -34,7 +33,7 @@ public class AcademicEducation {
     private String institution;
 
     @ManyToOne
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_profile")
 	private Profile profileAcademic;
     
 }
