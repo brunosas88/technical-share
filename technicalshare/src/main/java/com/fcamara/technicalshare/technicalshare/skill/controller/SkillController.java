@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/skill")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "security")
+//@SecurityRequirement(name = "security")
 public class SkillController {
 
     private final SkillService skillService;

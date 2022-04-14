@@ -31,5 +31,4 @@ public class User {
     @JoinColumn(name = "id_profile")
     private Profile userProfile;
 
-
 }

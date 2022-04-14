@@ -12,7 +12,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/requisitions")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "security")
+//@SecurityRequirement(name = "security")
 public class RequisitionController {
 
     private final RequisitionService requisitionService;

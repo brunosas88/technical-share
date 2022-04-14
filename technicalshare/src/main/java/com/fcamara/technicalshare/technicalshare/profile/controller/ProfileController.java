@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/profiles")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "security")
+//@SecurityRequirement(name = "security")
 public class ProfileController {
 
     private final ProfileService profileService;

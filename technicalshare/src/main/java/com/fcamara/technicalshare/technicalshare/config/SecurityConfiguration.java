@@ -21,10 +21,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user").hasRole("ADMIN")
+                .antMatchers("/user/login", "/profiles/register").permitAll()
+                .antMatchers("/user/register").hasRole("ADMIN")
                 .antMatchers("/profiles/*", "/requisitions").hasAnyRole("ADMIN","CLIENT","DEV")
-                .antMatchers("/profiles/*").hasRole("DEV")
-                .anyRequest().authenticated()
+                .antMatchers("/skill").hasRole("DEV")
         ;
     }
 
