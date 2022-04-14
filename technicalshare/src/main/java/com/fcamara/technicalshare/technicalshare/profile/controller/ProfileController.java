@@ -20,13 +20,13 @@ public class ProfileController {
     private final ProfileService profileService;
     
     @GetMapping("/findall")
-    public ResponseEntity<Page<ProfileDTO>> findAllProfile(@Nullable Pageable pageable) {
-        return ResponseEntity.ok(profileService.findAllProfile(pageable));
+    public ResponseEntity<Page<ProfileDTO>> findAllProfile(@RequestParam String toExcludeProfileEmail, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findAllProfile(toExcludeProfileEmail, pageable));
     }
 
     @GetMapping("/findbyname")
-    public ResponseEntity<Page<ProfileDTO>> findProfileByUserName (String name, @Nullable Pageable pageable) {
-        return ResponseEntity.ok(profileService.findProfileByUserName(name, pageable));
+    public ResponseEntity<Page<ProfileDTO>> findProfileByUserName (String name, String toExcludeProfileEmail, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findProfileByUserName(name, toExcludeProfileEmail, pageable));
     }
     
     @GetMapping("/findprofile")
@@ -40,8 +40,8 @@ public class ProfileController {
 	}
 
     @GetMapping("/findbyskill")
-    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@Nullable @RequestParam String firstSkill, @Nullable @RequestParam String secondSkill, @Nullable @RequestParam String filterXP, @Nullable Pageable pageable) {
-        return ResponseEntity.ok(profileService.findProfilesBySkill(firstSkill, secondSkill, filterXP, pageable));
+    public ResponseEntity<Page<ProfileDTO>> findProfilesBySkill(@Nullable @RequestParam String firstSkill, @Nullable @RequestParam String secondSkill, @Nullable @RequestParam String filterXP, @RequestParam String toExcludeProfileEmail, @Nullable Pageable pageable) {
+        return ResponseEntity.ok(profileService.findProfilesBySkill(firstSkill, secondSkill, filterXP, pageable, toExcludeProfileEmail));
     }
 
 }

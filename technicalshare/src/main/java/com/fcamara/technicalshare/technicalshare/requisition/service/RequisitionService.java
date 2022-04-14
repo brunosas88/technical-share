@@ -1,6 +1,8 @@
 package com.fcamara.technicalshare.technicalshare.requisition.service;
 
+import com.fcamara.technicalshare.technicalshare.contact.model.Contact;
 import com.fcamara.technicalshare.technicalshare.contact.service.ContactService;
+import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.profile.service.ProfileService;
 import com.fcamara.technicalshare.technicalshare.requisition.dto.RequisitionDTO;
 import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
@@ -8,6 +10,8 @@ import com.fcamara.technicalshare.technicalshare.requisition.repository.Requisit
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,20 +25,27 @@ public class RequisitionService {
 
     public void registerRequisition(RequisitionDTO requisitionDTO) {
         Requisition newRequisition = requisitionRepository.save(RequisitionDTO.convertToNewModel(requisitionDTO));
+        newRequisition.getContactList().addAll(registerRequisitionContacts(requisitionDTO, newRequisition)
+        );
+        profileService.registerRequisitionProfile(newRequisition, newRequisition.getUserEmail());
+        profileService.registerRequisitionProfile(newRequisition, newRequisition.getRequiredUserEmail());
+    }
 
-        newRequisition.getContactList().addAll(requisitionDTO.getContactList()
+    private List<Contact> registerRequisitionContacts(RequisitionDTO requisitionDTO, Requisition newRequisition) {
+        return requisitionDTO.getContactList()
                 .stream()
                 .map(contactDTO -> contactService.registerContact(contactDTO, newRequisition))
-                .collect(Collectors.toList())
-        );
-        profileService.registerRequisitionProfile(newRequisition);
+                .collect(Collectors.toList());
     }
 
-    public void deleteRequisition(UUID uuidRequisition, String emailRemoveRequest) {
+    public void deleteRequisition(UUID uuidRequisition, String profileEmail) {
         Requisition toBeRemovedRequisition = requisitionRepository.findRequisitionByUuidRequisition(uuidRequisition);
-        profileService.deleteRequisitionProfile(toBeRemovedRequisition, emailRemoveRequest);
+        if (Objects.equals(profileEmail, toBeRemovedRequisition.getUserEmail())) {
+            profileService.deleteRequisitionFromLearner(toBeRemovedRequisition, profileEmail);
+        }else if (Objects.equals(profileEmail, toBeRemovedRequisition.getRequiredUserEmail())) {
+            profileService.deleteRequisitionFromMentor(toBeRemovedRequisition, profileEmail);
+        } else {
+            throw new NullPointerException();
+        }
     }
-
-
-
 }
