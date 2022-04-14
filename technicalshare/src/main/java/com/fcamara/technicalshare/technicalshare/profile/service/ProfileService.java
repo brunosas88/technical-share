@@ -7,12 +7,14 @@ import com.fcamara.technicalshare.technicalshare.links.service.LinksService;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import com.fcamara.technicalshare.technicalshare.profession.service.ProfessionService;
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
+import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileRegisterRequestDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.profile.repository.ProfileRepository;
 import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
+import com.fcamara.technicalshare.technicalshare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -36,40 +38,42 @@ public class ProfileService {
     private final SkillService skillService;
     private final ProfessionService professionService;
     private final AcademicEducationService academicEducationService;
+    private final UserService userService;
 
     @Transactional
-    public ProfileDTO registerProfile(ProfileDTO profileDTO) {
-        Profile newProfile = profileRepository.save(ProfileDTO.convertToModel(profileDTO));
-        newProfile.getLinksList().addAll(registerProfileLinks(profileDTO, newProfile));
-        newProfile.getExpertiseList().addAll(registerProfileSkills(profileDTO, newProfile));
-        newProfile.getProfessionList().addAll(registerProfileProfessions(profileDTO, newProfile));
-        newProfile.getAcademicEducationList().addAll(registerProfileAcademics(profileDTO, newProfile));
+    public ProfileDTO registerProfile(ProfileRegisterRequestDTO profileRegisterRequestDTO) {
+        Profile newProfile = profileRepository.save(ProfileRegisterRequestDTO.convertToProfileModel(profileRegisterRequestDTO));
+        newProfile.getLinksList().addAll(registerProfileLinks(profileRegisterRequestDTO, newProfile));
+        newProfile.getExpertiseList().addAll(registerProfileSkills(profileRegisterRequestDTO, newProfile));
+        newProfile.getProfessionList().addAll(registerProfileProfessions(profileRegisterRequestDTO, newProfile));
+        newProfile.getAcademicEducationList().addAll(registerProfileAcademics(profileRegisterRequestDTO, newProfile));
+        userService.registerUser(ProfileRegisterRequestDTO.convertToUserDTO(profileRegisterRequestDTO), newProfile);
         return ProfileDTO.convertToDTO(newProfile);
     }
 
-    private List<AcademicEducation> registerProfileAcademics(ProfileDTO profileDTO, Profile newProfile) {
-        return profileDTO.getAcademicEducationList()
+    private List<AcademicEducation> registerProfileAcademics(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getAcademicEducationList()
                 .stream()
                 .map(newAcademicEducation -> academicEducationService.registerAcademicEducation(newAcademicEducation, newProfile))
                 .collect(Collectors.toList());
     }
 
-    private List<Profession> registerProfileProfessions(ProfileDTO profileDTO, Profile newProfile) {
-        return profileDTO.getProfessionList()
+    private List<Profession> registerProfileProfessions(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))
                 .collect(Collectors.toList());
     }
 
-    private List<Skill> registerProfileSkills(ProfileDTO profileDTO, Profile newProfile) {
-        return profileDTO.getExpertiseList()
+    private List<Skill> registerProfileSkills(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getExpertiseList()
                 .stream()
                 .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
                 .collect(Collectors.toList());
     }
 
-    private List<Links> registerProfileLinks(ProfileDTO profileDTO, Profile newProfile) {
-        return profileDTO.getLinksListDTO()
+    private List<Links> registerProfileLinks(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getLinksListDTO()
                 .stream()
                 .map(newLink -> linksService.registerLink(newLink, newProfile))
                 .collect(Collectors.toList());
@@ -81,7 +85,7 @@ public class ProfileService {
     }
 
     public Page<ProfileDTO> findAllProfile(String toExcludeProfileEmail, Pageable pageable) {
-        List<ProfileDTO>  profileDTOList = extractUnecessaryProfile(profileRepository.findAll(pageable.getSort()) , toExcludeProfileEmail);
+        List<ProfileDTO> profileDTOList = extractUnecessaryProfile(profileRepository.findAll(pageable.getSort()) , toExcludeProfileEmail);
         return ListToPage(profileDTOList, pageable);
     }
 

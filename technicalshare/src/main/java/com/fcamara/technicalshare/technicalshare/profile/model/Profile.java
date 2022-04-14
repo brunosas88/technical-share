@@ -5,6 +5,7 @@ import com.fcamara.technicalshare.technicalshare.links.model.Links;
 import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
+import com.fcamara.technicalshare.technicalshare.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,6 +70,6 @@ public class Profile {
     )
     private List<Requisition> mentoringListGiven = new ArrayList<>();
 
-
-
+    @OneToOne(mappedBy = "userProfile")
+    private User user;
 }

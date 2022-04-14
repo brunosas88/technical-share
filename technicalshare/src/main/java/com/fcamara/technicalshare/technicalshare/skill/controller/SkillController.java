@@ -2,6 +2,7 @@ package com.fcamara.technicalshare.technicalshare.skill.controller;
 
 import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/skill")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "security")
 public class SkillController {
 
     private final SkillService skillService;

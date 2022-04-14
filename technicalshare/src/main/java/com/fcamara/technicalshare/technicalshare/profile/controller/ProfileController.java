@@ -1,7 +1,9 @@
 package com.fcamara.technicalshare.technicalshare.profile.controller;
 
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
+import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileRegisterRequestDTO;
 import com.fcamara.technicalshare.technicalshare.profile.service.ProfileService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/profiles")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "security")
 public class ProfileController {
 
     private final ProfileService profileService;
@@ -35,8 +38,8 @@ public class ProfileController {
     }
 
     @PostMapping("/register")
-	public ResponseEntity<ProfileDTO> registerProfile(@Valid @RequestBody ProfileDTO profileDTO){
-		return ResponseEntity.ok(profileService.registerProfile(profileDTO));
+	public ResponseEntity<ProfileDTO> registerProfile(@Valid @RequestBody ProfileRegisterRequestDTO profileRegisterRequestDTO){
+		return ResponseEntity.ok(profileService.registerProfile(profileRegisterRequestDTO));
 	}
 
     @GetMapping("/findbyskill")

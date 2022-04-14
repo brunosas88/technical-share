@@ -1,5 +1,8 @@
 package com.fcamara.technicalshare.technicalshare;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/")
 @SpringBootApplication
+@SecurityScheme(name = "security", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class TechnicalshareApplication {
 
 	@GetMapping

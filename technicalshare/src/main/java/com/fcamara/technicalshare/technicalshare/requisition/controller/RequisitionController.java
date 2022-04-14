@@ -2,6 +2,7 @@ package com.fcamara.technicalshare.technicalshare.requisition.controller;
 
 import com.fcamara.technicalshare.technicalshare.requisition.dto.RequisitionDTO;
 import com.fcamara.technicalshare.technicalshare.requisition.service.RequisitionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/requisitions")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "security")
 public class RequisitionController {
 
     private final RequisitionService requisitionService;
