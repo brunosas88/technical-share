@@ -12,8 +12,7 @@ API Rest para agendamento de estações de trabalho e salas de reuniões na FCam
 ## Documentação
 
 É possível acessar a documentação do projeto pelo [Swagger](https://orange-space.herokuapp.com/docs/|).
-
- <img src="https://github.com/felipeblobo/squad4-backend/blob/master/postman_sample.PNG" alt="postman_sample" width="800">
+<img src="https://user-images.githubusercontent.com/88353298/163490412-fa4769a0-0b2f-4dd4-aa1a-3e1e661d1a39.png" alt="postman_sample" width="800">
 
 ## Tecnologias
 
