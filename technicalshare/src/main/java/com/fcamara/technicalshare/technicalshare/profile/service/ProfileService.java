@@ -148,9 +148,15 @@ public class ProfileService {
     }
     
     
-    public void registerRequisitionProfile(Requisition requisition, String profileEmail) {
+    public void registerRequisitionLearner(Requisition requisition, String profileEmail) {
         Profile user = profileRepository.findProfileByEmail(profileEmail);
         user.getMentoringListReceived().add(requisition);
+        profileRepository.save(user);
+    }
+
+    public void registerRequisitionMentor(Requisition requisition, String profileEmail) {
+        Profile user = profileRepository.findProfileByEmail(profileEmail);
+        user.getMentoringListGiven().add(requisition);
         profileRepository.save(user);
     }
 

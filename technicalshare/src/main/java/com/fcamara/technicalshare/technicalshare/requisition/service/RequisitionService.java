@@ -27,8 +27,8 @@ public class RequisitionService {
         Requisition newRequisition = requisitionRepository.save(RequisitionDTO.convertToNewModel(requisitionDTO));
         newRequisition.getContactList().addAll(registerRequisitionContacts(requisitionDTO, newRequisition)
         );
-        profileService.registerRequisitionProfile(newRequisition, newRequisition.getUserEmail());
-        profileService.registerRequisitionProfile(newRequisition, newRequisition.getRequiredUserEmail());
+        profileService.registerRequisitionLearner(newRequisition, newRequisition.getUserEmail());
+        profileService.registerRequisitionMentor(newRequisition, newRequisition.getRequiredUserEmail());
     }
 
     private List<Contact> registerRequisitionContacts(RequisitionDTO requisitionDTO, Requisition newRequisition) {
