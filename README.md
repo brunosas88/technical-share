@@ -23,16 +23,24 @@ A API aqui apresentada foi implementada pelo time de desenvolvedores do Squad 8 
 
 <br>
 
-<h2 id='documentacao'>Documentação</h2>
+<h2 id='documentacao'>📄Documentação</h2>
 
 A documentação foi implementada com o uso do [Swagger](https://swagger.io/)
-<img src="MUDAR ESSA IMAGEM" alt="postman_sample" width="800">
+<img src="https://user-images.githubusercontent.com/88353298/163569306-131bb742-e6cd-4a48-bff7-5f3ef609c3c1.png" alt="postman_sample" width="800">
 
-<h2 id='tech'>Tecnologias</h2>
+<h2 id='tech'>🚀Tecnologias</h2>
 
 O projeto foi desenvolvido empregando o framework do Swagger como interface para acesso direto às rotas do sistema implementado em [Spring Boot 2.6.6](https://spring.io/projects/spring-boot) e [Java 11](https://docs.oracle.com/en/java/javase/11/docs/api/index.html). O banco de dados utilizado foi PostgresSQL do próprio Heroku onde a aplicação está disponibilizada. Não são necessárias instalações de programas terceiros para executar e manipular a [API](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html). 
+<p>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"  width='80px'/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"  width='80px'/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width='80px'/>
+</p>
 
-<h2 id='instrucoes'>Instruções</h2>
+
+<br>
+
+<h2 id='instrucoes'>🛠Instruções</h2>
 
 Foi utilizada a configuração básica de segurança do Spring Security, por isso algumas rotas são de acesso restrito, controlado pelo tipo de autorização que cada usuário possui: 
 - ADMIN para administradores do sistema podem acessar todas as rotas com exceção da /skill/* , essa role possui a função exclusiva de cadastro de outros usuários e definições de suas autorizações através da rota user/register.
@@ -46,21 +54,21 @@ Foi utilizada a configuração básica de segurança do Spring Security, por iss
 
 <br>
 
-<h2 id='roteiro'>Roteiro</h2>
+<h2 id='roteiro'>📝Roteiro</h2>
 
 As rotas podem ser acessadas em qualquer ordem mas para melhor visualização dos dados de retorno é aconselhável a seguinte sequência:
 
 ### 1. /skill (não necessita de autenticação)
 - Objetivo: Listar todas as habilidades cadastradas no banco de dados disponíveis para especificar as competências das quais o usuário se sente mais à vontade em compartilhar conhecimento.
 - O que fazer:
- -  Basta acessar a rota que ela retorna a lista das habilidades no sistema.
- -  Utilizar
+  - Basta acessar a rota que ela retorna a lista das habilidades no sistema.
+  - Utilizar
 
 ### 2. /profiles/register (não necessita de autenticação)
 - Objetivo: É enviado um json com as principais características a serem cadastradas no sistema e as informações são retornadas para confirmação. (Já possui algumas informações extras para o próximo update). 
 - O que fazer:  
- - Cadastre dois ou mais usuários para melhor utilização das próximas rotas;
- - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são userName, email e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota /skill.
+  - Cadastre dois ou mais usuários para melhor utilização das próximas rotas;
+  - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são userName, email e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota /skill.
 
 ### 3. /profiles/* (métodos GET - necessita de alguma autenticação)
 - Objetivo: Encontrar perfil(s) no sistema.
@@ -87,7 +95,7 @@ O Back está disponivel na Web atraves da url : https://technicalsharesquad8.her
 Mas caso queira acessar localmente 
 
 ``` bash
-git clone https://github.com/#
+git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git
 
 .
 .
