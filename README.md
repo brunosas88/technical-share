@@ -11,16 +11,12 @@
   <a href='#instrucoes'>Instruções</a> | 
   <a href='#roteiro'>Roteiro</a> | 
   <a href='#comorodaroprojeto'>Como Rodar o Projeto</a>
-<!--   <a href='#features'>Features</a> | 
-  <a href='#conteudoxterno'>Conteúdo Externo</a> | 
-  <a href='#nossaequipe'>Nossa Equipe</a> | 
-  <a href='#licenca'>Licença</a> |  -->
-
 </p>
 
 <div id="projeto" style="text-align: justify">
         
-A Technical Share é uma aplicação web com o objetivo de catalogar os profissionais do Grupo FCamara para facilitar a troca de experiências e networking, principalmente de quem está em busca de orientações na área de tecnologia. Na plataforma, após a realização do cadastro do usuário, é possível ver os perfis dos profissionais já cadastrados na plataforma que contém, dentre outros, uma descrição do cargo que exercem, biografia pessoal e as habilidades que têm mais domínio. Essas informações já permitem ao usuário um rápido e fácil reconhecimento de pessoas das quais ele possa pedir orientações, tirar dúvidas e mesmo conhecer melhor os colegas que dividem o mesmo espaço de trabalho. Saiba mais sobre o projeto ![aqui](colocar URL do artigo de UX).<br>
+A Technical Share é uma aplicação web com o objetivo de catalogar os profissionais do Grupo FCamara para facilitar a troca de experiências e networking, principalmente de quem está em busca de orientações na área de tecnologia. Na plataforma, após a realização do cadastro do usuário, é possível ver os perfis dos profissionais já cadastrados na plataforma que contém, dentre outros, uma descrição do cargo que exercem, biografia pessoal e as habilidades que têm mais domínio. Essas informações já permitem ao usuário um rápido e fácil reconhecimento de pessoas das quais ele possa pedir orientações, tirar dúvidas e mesmo conhecer melhor os colegas que dividem o mesmo espaço de trabalho. <strong><em>Saiba mais do projeto em > https://github.com/squad8-hackatho/squad8-hackatho</em></strong> <br> 
+        
 A API aqui apresentada foi implementada pelo time de desenvolvedores do Squad 8 pela etapa de Hackathon do [Programa de Formação Season 3](https://digital.fcamara.com.br/programadeformacao) do [Grupo FCamara](https://www.fcamara.com.br/), e mostra todas as rotas criadas no back-end para dar suporte as solicitações do front-end. 
 
 </div>
