@@ -1,13 +1,11 @@
-<h1 align='center'>Squad 8 - Hackathon Back </h1> 
+<h1 align='center'>Squad 8 - Back - Hackathon FCamara  </h1> 
 <br/>
 <div align='center'>
         <a href='#'><img src='https://i.imgur.com/aKiNSth.png' alt='Logo Technical Share.' width='300px'/></a>
 </div>
 <br>
-
-API Rest para agendamento de estações de trabalho e salas de reuniões na FCamara - Formação e Consultoria.Este Projeto desenvolvido pelo **squad 4** no hackathon do [Programa de Formação](https://digital.fcamara.com.br/programadeformacao) do [Grupo FCamara](https://www.fcamara.com.br/) onde criamos um sistema de login/registro para agendamento de idas ao ambiente de trabalho, apresentando todos os cuidados necessários para a volta do trabalho presencial.
- 
- Saiba mais sobre o projeto [aqui](https://acbragab.medium.com/orange-space-encarando-o-novo-normal-na-reabertura-dos-escrit%C3%B3rios-e821808cf311).
+A Technical Share é uma aplicação web com o objetivo de catalogar os profissionais do Grupo FCamara para facilitar a troca de experiências e networking, principalmente de quem está em busca de orientações na área de tecnologia. Na plataforma, após a realização do cadastro do usuário, é possível ver os perfis dos profissionais já cadastrados na plataforma que contém, dentre outros, uma descrição do cargo que exercem, biografia pessoal e as habilidades que têm mais domínio. Essas informações já permitem ao usuário um rápido e fácil reconhecimento de pessoas das quais ele possa pedir orientações, tirar dúvidas e mesmo conhecer melhor os colegas que dividem o mesmo espaço de trabalho. Saiba mais sobre o projeto [aqui](colocar URL do artigo de UX).
+A API aqui apresentada foi desenvolvida pelo time de desenvolvedores do Squad 8 pela etapa de Hackathon do [Programa de Formação Season 3](https://digital.fcamara.com.br/programadeformacao) [Grupo FCamara](https://www.fcamara.com.br/), e mostra todas as rotas criadas no back-end para dar suporte as solicitações do front-end. 
  
 ## Documentação
 
