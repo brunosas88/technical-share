@@ -6,7 +6,7 @@
 <br>
 <div style="text-align: justify">
 A Technical Share é uma aplicação web com o objetivo de catalogar os profissionais do Grupo FCamara para facilitar a troca de experiências e networking, principalmente de quem está em busca de orientações na área de tecnologia. Na plataforma, após a realização do cadastro do usuário, é possível ver os perfis dos profissionais já cadastrados na plataforma que contém, dentre outros, uma descrição do cargo que exercem, biografia pessoal e as habilidades que têm mais domínio. Essas informações já permitem ao usuário um rápido e fácil reconhecimento de pessoas das quais ele possa pedir orientações, tirar dúvidas e mesmo conhecer melhor os colegas que dividem o mesmo espaço de trabalho. Saiba mais sobre o projeto [aqui](colocar URL do artigo de UX).
-A API aqui apresentada foi desenvolvida pelo time de desenvolvedores do Squad 8 pela etapa de Hackathon do Programa de Formação Season 3(https://digital.fcamara.com.br/programadeformacao) Grupo FCamara(https://www.fcamara.com.br/), e mostra todas as rotas criadas no back-end para dar suporte as solicitações do front-end. 
+A API aqui apresentada foi desenvolvida pelo time de desenvolvedores do Squad 8 pela etapa de Hackathon do Programa de Formação Season 3(https://digital.fcamara.com.br/programadeformacao) Grupo [Grupo FCamara](https://www.fcamara.com.br/), e mostra todas as rotas criadas no back-end para dar suporte as solicitações do front-end. 
 </div>
 ## Documentação
 
