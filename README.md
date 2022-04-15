@@ -50,8 +50,28 @@ Foi utilizada a configuração básica de segurança do Spring Security, por iss
 - Obs. 2: existem usuários pré-cadastrados para facilitar a utilização das rotas:
   - usuário: admin / senha: admin (Autorização: ADMIN);
   - usuário dev / senha: dev (Autorização: DEV).
-- Obs. 3: O Back está disponivel na Web atraves da url https://technicalsharesquad8.herokuapp.com. Para utilização de qualquer rota basta completar a url com algum dos complementos mostrados na próxima sessão. Pode-se utilizar também o [Swagger-UI](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html) da aplicação.
 
+<br>
+
+<h2 id="comorodaroprojeto">:gear:Como rodar o projeto?</h2>
+
+O Back está disponivel na Web atraves da url https://technicalsharesquad8.herokuapp.com. Para utilização de qualquer rota basta completar a url com algum dos complementos mostrados na próxima sessão. Pode-se utilizar também o [Swagger-UI](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html) da aplicação.
+
+Mas caso queira acessar localmente:
+
+
+        
+``` bash
+git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git ```
+
+.
+.
+.
+.
+```
+        
+
+        
 <br>
 
 <h2 id='roteiro'>📝Roteiro</h2>
@@ -78,6 +98,67 @@ As rotas podem ser acessadas em qualquer ordem mas para melhor visualização do
  4. /profiles/findbyall : Apresenta listagem de todos os usuários do sistema exceto o perfil com email passado no campo "toExcludeProfileEmail".
 
 ### 4. /requisitions (necessita de alguma autenticação)
+- Objetivo: É enviado um json com os dados necessários para a marcação de um encontro entre quem realizou a requisição e o profissional escolhido. 
+
+<table>
+<tr>
+<th> Json </th>
+<th> Comentários </th>
+</tr>
+<tr>
+<td>
+
+``` json
+{
+  "uuidRequisition": "3fa85f64-5717-4562-b3fc-2c963f66afa6",   
+  "userName": "string",         
+  "userEmail": "string",       
+  "requiredUserName": "string",        
+  "requiredUserEmail": "string",       
+  "subject": "string",         
+  "keyWords": "string",         
+  "urgency": true,      
+  "message": "string",         
+  "contactList": [      
+    {
+      "contact": "string",      
+      "type": "string"          
+    }
+  ]
+}
+```
+
+</td>
+<td>
+
+```json
+
+  campo desnecessário, ele é gerado internamente pelo back
+  nome do usuário que está fazendo a requisição
+  email do usuário que está fazendo a requisição
+  nome do usuário que irá receber a requisição
+  email do usuário que irá receber a requisição
+  assunto que será tratado durante o encontro
+  palavras chaves que fazem parte do assunto a ser tratado
+  indicador com valores verdadeiro/falso para mostrar a urgência da requisição
+  texto com explicação mais detalhada sobre a intenção da marcação do encontro
+  lista de contatos para que o requisitado possa se comunicar com o solicitante 
+    
+  email, telefone ou outro contato em si
+  campo informando qual tipo de comunicação foi utilizado 
+    
+  
+
+```
+
+</td>
+</tr>
+</table>
+
+
+- O que fazer:  
+  - Cadastre dois ou mais usuários para melhor utilização das próximas rotas;
+  - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são userName, email e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota /skill.
 
 ### 5. /skill/* (somente autenticação DEV)
 
@@ -88,19 +169,6 @@ As rotas podem ser acessadas em qualquer ordem mas para melhor visualização do
 
 <br>
 
-<h2 id="comorodaroprojeto">:gear:Como rodar o projeto?</h2>
 
-O Back está disponivel na Web atraves da url : https://technicalsharesquad8.herokuapp.com/
-
-Mas caso queira acessar localmente 
-
-``` bash
-git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git
-
-.
-.
-.
-.
-```
 <hr>
 <p> Feito com muito 🧡 pelo Squad-8<br> #FuturosSangueLaranja 🚀 <p>
