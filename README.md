@@ -19,7 +19,7 @@ A documentação foi implementada com o uso do [Swagger](https://technicalshares
 
 ## Tecnologias
 
-O projeto foi desenvolvido empregando o framework do Swagger como interface para acesso direto às rotas do sistema implementado em Spring Boot 2.6.6 e Java 11. O banco de dados utilizado foi PostgresSQL do próprio Heroku onde a aplicação está disponibilizada. Não são necessárias instalações de programas terceiros para executar e manipular a [API](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html). 
+O projeto foi desenvolvido empregando o framework do Swagger como interface para acesso direto às rotas do sistema implementado em [Spring Boot 2.6.6](https://spring.io/projects/spring-boot) e [Java 11](https://docs.oracle.com/en/java/javase/11/docs/api/index.html). O banco de dados utilizado foi PostgresSQL do próprio Heroku onde a aplicação está disponibilizada. Não são necessárias instalações de programas terceiros para executar e manipular a [API](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html). 
 
 ## Instruções
 
@@ -37,22 +37,36 @@ Foi utilizada a configuração básica de segurança do Spring Security, por iss
 
 As rotas podem ser acessadas em qualquer ordem mas para melhor visualização dos dados de retorno é aconselhável a seguinte sequência:
 
-### 1. /skill
+### 1. /skill (não necessita de autenticação)
 - Objetivo: Listar todas as habilidades cadastradas no banco de dados disponíveis para especificar as competências das quais o usuário se sente mais à vontade em compartilhar conhecimento.
 - O que fazer:
  -  Basta acessar a rota que ela retorna a lista das habilidades no sistema.
  -  Utilizar
 
-### 2. /profiles/register :
+### 2. /profiles/register (não necessita de autenticação)
 - Objetivo: É enviado um json com as principais características a serem cadastradas no sistema e as informações são retornadas para confirmação. (Já possui algumas informações extras para o próximo update). 
 - O que fazer:  
  - Cadastre dois ou mais usuários para melhor utilização das próximas rotas;
  - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são userName, email e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota /skill.
 
-### 3. /profiles/* (métodos GET):
+### 3. /profiles/* (métodos GET - necessita de alguma autenticação)
 - Objetivo: Encontrar perfil(s) no sistema.
  1. /profiles/findprofile : Encontrar um perfil no sistema através do email.
- 2. /proiles/findbyskill : Utiliza campo "skill" das habilidades para filtrar 
+ 2. /proiles/findbyskill : Utiliza campo "skill" das habilidades para filtrar os perfis buscados a partir de uma ou duas habilidades, permitindo também um filtro por nível de experiência (Sênior, Pleno, Júnior, Trainee, Estagiário). O único campo obrigatório é o "toExcludeProfileEmail" que serve para retirar da lista retornada o perfil de quem está fazendo essa busca.
+ 3. /proiles/findbyname : Retorna lista de usuários pelo nome ou parte dele, também utiliza o campo "toExcludeProfileEmail".
+ 4. /profiles/findbyall : Apresenta listagem de todos os usuários do sistema exceto o perfil com email passado no campo "toExcludeProfileEmail".
+
+### 4. /requisitions (necessita de alguma autenticação)
+
+### 5. /skill/* (somente autenticação DEV)
+
+### 6. /user/register (somente autenticação ADMIN)
+
+### 7. /user/login (não necessita de autenticação)
+
+
+
+
 
 
 Documentação
