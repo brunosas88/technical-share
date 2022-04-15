@@ -66,12 +66,4 @@ public class ProfileDTO {
         return dto;
     }
 
-    public static Profile convertToModel(ProfileDTO profileDTO) {
-        Profile model = new Profile();
-        model.setUserName(profileDTO.getUserName());
-        model.setEmail(profileDTO.getEmail());
-        model.setBio(profileDTO.getBio());
-        model.setImage(profileDTO.getImage());
-        return model;
-    }
 }

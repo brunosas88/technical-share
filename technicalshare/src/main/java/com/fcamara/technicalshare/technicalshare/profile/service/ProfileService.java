@@ -1,15 +1,21 @@
 package com.fcamara.technicalshare.technicalshare.profile.service;
 
+import com.fcamara.technicalshare.technicalshare.academiceducation.model.AcademicEducation;
 import com.fcamara.technicalshare.technicalshare.academiceducation.service.AcademicEducationService;
+import com.fcamara.technicalshare.technicalshare.links.model.Links;
 import com.fcamara.technicalshare.technicalshare.links.service.LinksService;
+import com.fcamara.technicalshare.technicalshare.profession.model.Profession;
 import com.fcamara.technicalshare.technicalshare.profession.service.ProfessionService;
 import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileDTO;
+import com.fcamara.technicalshare.technicalshare.profile.dto.ProfileRegisterRequestDTO;
 import com.fcamara.technicalshare.technicalshare.profile.model.Profile;
 import com.fcamara.technicalshare.technicalshare.profile.repository.ProfileRepository;
 import com.fcamara.technicalshare.technicalshare.requisition.model.Requisition;
 import com.fcamara.technicalshare.technicalshare.skill.model.Skill;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
 
+import com.fcamara.technicalshare.technicalshare.user.dto.UserResponseDTO;
+import com.fcamara.technicalshare.technicalshare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -33,77 +39,97 @@ public class ProfileService {
     private final SkillService skillService;
     private final ProfessionService professionService;
     private final AcademicEducationService academicEducationService;
+    private final UserService userService;
 
     @Transactional
-    public ProfileDTO registerProfile(ProfileDTO profileDTO) {
+    public UserResponseDTO registerProfile(ProfileRegisterRequestDTO profileRegisterRequestDTO) {
 
-        Profile newProfile = profileRepository.save(ProfileDTO.convertToModel(profileDTO));
+        Profile newProfile = profileRepository.save(ProfileRegisterRequestDTO.convertToProfileModel(profileRegisterRequestDTO));
+        userService.registerUser(ProfileRegisterRequestDTO.convertToUserDTO(profileRegisterRequestDTO), newProfile);
+        newProfile.getLinksList().addAll(registerProfileLinks(profileRegisterRequestDTO, newProfile));
+        newProfile.getExpertiseList().addAll(registerProfileSkills(profileRegisterRequestDTO, newProfile));
+        newProfile.getProfessionList().addAll(registerProfileProfessions(profileRegisterRequestDTO, newProfile));
+        newProfile.getAcademicEducationList().addAll(registerProfileAcademics(profileRegisterRequestDTO, newProfile));
+        return new UserResponseDTO(userService.getAuthentication(profileRegisterRequestDTO.getEmail(), profileRegisterRequestDTO.getPassword() ), newProfile.getEmail());
+    }
 
-        newProfile.getLinksList().addAll(profileDTO.getLinksListDTO()
+    private List<AcademicEducation> registerProfileAcademics(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getAcademicEducationList()
                 .stream()
-                .map(newLink -> linksService.registerLink(newLink, newProfile))
-                .collect(Collectors.toList())
-        );
-        newProfile.getExpertiseList().addAll(profileDTO.getExpertiseList()
-                .stream()
-                .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
-                .collect(Collectors.toList())
-        );
-        newProfile.getProfessionList().addAll(profileDTO.getProfessionList()
+                .map(newAcademicEducation -> academicEducationService.registerAcademicEducation(newAcademicEducation, newProfile))
+                .collect(Collectors.toList());
+    }
+
+    private List<Profession> registerProfileProfessions(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getProfessionList()
                 .stream()
                 .map(newProfession -> professionService.registerProfession(newProfession, newProfile))
-                .collect(Collectors.toList())
-        );
-        newProfile.getAcademicEducationList().addAll(profileDTO.getAcademicEducationList()
-        .stream()
-        .map(newAcademicEducation -> academicEducationService.registerAcademicEducation(newAcademicEducation, newProfile))
-        .collect(Collectors.toList())
-        );
-
-        return ProfileDTO.convertToDTO(newProfile);
+                .collect(Collectors.toList());
     }
 
-    public Page<ProfileDTO> findAllProfile(Pageable pageable) {
-        return profileRepository.findAll(pageable).map(ProfileDTO::convertToDTO);
+    private List<Skill> registerProfileSkills(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getExpertiseList()
+                .stream()
+                .map(newSkill -> skillService.registerProfileSkill(newSkill, newProfile))
+                .collect(Collectors.toList());
     }
+
+    private List<Links> registerProfileLinks(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
+        return profileRegisterRequestDTO.getLinksListDTO()
+                .stream()
+                .map(newLink -> linksService.registerLink(newLink, newProfile))
+                .collect(Collectors.toList());
+    }
+    
 
     public ProfileDTO findProfile (String email) {
         return ProfileDTO.convertToDTO(profileRepository.findProfileByEmail(email));
     }
 
-    public Page<ProfileDTO> findProfileByUserName (String name, Pageable pageable) {
-        return profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable).map(ProfileDTO::convertToDTO);
+    public Page<ProfileDTO> findAllProfile(String toExcludeProfileEmail, Pageable pageable) {
+        List<ProfileDTO> profileDTOList = extractUnecessaryProfile(profileRepository.findAll(pageable.getSort()) , toExcludeProfileEmail);
+        return ListToPage(profileDTOList, pageable);
     }
 
-    public Page<ProfileDTO> findProfilesBySkill(String firstSkill, String secondSkill, String filterXP, Pageable pageable) {
+    public Page<ProfileDTO> findProfileByUserName (String name , String toExcludeProfileEmail, Pageable pageable) {
+        List<ProfileDTO> profileDTOList = extractUnecessaryProfile(profileRepository.findProfileByUserNameIgnoreCaseContains(name, pageable.getSort()), toExcludeProfileEmail);
+        return ListToPage(profileDTOList, pageable);
+    }
 
-        List<ProfileDTO> profileDTOList = new ArrayList<>();
-
+    public Page<ProfileDTO> findProfilesBySkill(String firstSkill, String secondSkill, String filterXP, Pageable pageable, String toExcludeProfileEmail) {
+        List<ProfileDTO> profileDTOList;
         if( (Objects.equals(firstSkill,NULL_VALUE) && Objects.equals(secondSkill,NULL_VALUE)) || (Objects.equals(firstSkill,null) && Objects.equals(secondSkill,null))) {
-            return findAllProfile(pageable);
+            return findAllProfile(toExcludeProfileEmail, pageable);
         } else if(Objects.equals(firstSkill,NULL_VALUE) || Objects.equals(firstSkill,null)) {
             Skill skill = skillService.getSkillBySkill(secondSkill);
-            profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+            profileDTOList = extractUnecessaryProfile(skill.getProfileExpertiseList(), toExcludeProfileEmail);
         } else if(Objects.equals(secondSkill,NULL_VALUE) || Objects.equals(secondSkill,null)) {
             Skill skill = skillService.getSkillBySkill(firstSkill);
-            profileDTOList = skill.getProfileExpertiseList().stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+            profileDTOList = extractUnecessaryProfile(skill.getProfileExpertiseList(), toExcludeProfileEmail);
         } else {
-            List<String> emailProfileList = skillService.findByMultipleSkills(firstSkill, secondSkill);
-            for ( String email : emailProfileList  ) {
-                profileDTOList.add(findProfile(email));
-            }
+            profileDTOList = findByMultipleSkills(firstSkill, secondSkill, toExcludeProfileEmail);
         }
-
-        if( Objects.equals(filterXP, NULL_VALUE) || Objects.equals(filterXP, null) ) {
-            return toPage(profileDTOList, pageable);
-        } else {
-            List<ProfileDTO> profileDTOListFiltered = profileDTOList.stream().filter( profileDTO -> Objects.equals(profileDTO.getProfessionList().get(0).getExperienceLevel(),filterXP)).collect(Collectors.toList());
-            return toPage(profileDTOListFiltered, pageable);
-        }
-
+        return ListToPage(FilteredProfiles(filterXP, profileDTOList), pageable);
     }
 
-    private Page toPage(List list, Pageable pageable) {
+    private List<ProfileDTO> findByMultipleSkills(String firstSkill, String secondSkill, String toExcludeProfileEmail) {
+        List<ProfileDTO> profileDTOList;
+        List<String> emailList = skillService.findByMultipleSkills(firstSkill, secondSkill);
+        List<Profile> profileList = new ArrayList<>();
+        emailList.forEach(email -> profileList.add(profileRepository.findProfileByEmail(email)));
+        profileDTOList = extractUnecessaryProfile(profileList, toExcludeProfileEmail);
+        return profileDTOList;
+    }
+
+    private List<ProfileDTO> FilteredProfiles(String filterXP, List<ProfileDTO> profileDTOList) {
+        if( Objects.equals(filterXP, NULL_VALUE) || Objects.equals(filterXP, null) ) {
+            return profileDTOList;
+        } else {
+            return profileDTOList.stream().filter(profileDTO -> Objects.equals(profileDTO.getProfessionList().get(0).getExperienceLevel(), filterXP)).collect(Collectors.toList());
+        }
+    }
+
+    private Page ListToPage(List list, Pageable pageable) {
         if (pageable.getOffset() >= list.size()) {
             return Page.empty();
         }
@@ -115,28 +141,38 @@ public class ProfileService {
         return new PageImpl(subList, pageable, list.size());
     }
 
-    public void registerRequisitionProfile(Requisition requisition) {
-        Profile user = profileRepository.findProfileByEmail(requisition.getUserEmail());
+    private List<ProfileDTO> extractUnecessaryProfile(List<Profile> profileList, String toExcludeProfileEmail) {
+        Profile user = profileRepository.findProfileByEmail(toExcludeProfileEmail);
+        profileList.remove(user);
+        return profileList.stream().map(ProfileDTO::convertToDTO).collect(Collectors.toList());
+    }
+    
+    
+    public void registerRequisitionLearner(Requisition requisition, String profileEmail) {
+        Profile user = profileRepository.findProfileByEmail(profileEmail);
         user.getMentoringListReceived().add(requisition);
         profileRepository.save(user);
-        Profile requiredUser = profileRepository.findProfileByEmail(requisition.getRequiredUserEmail());
-        requiredUser.getMentoringListGiven().add(requisition);
-        profileRepository.save(requiredUser);
     }
 
-    public void deleteRequisitionProfile(Requisition toBeRemovedRequisition, String emailRemoveRequest) {
-
-        if (Objects.equals(emailRemoveRequest, toBeRemovedRequisition.getUserEmail())) {
-            Profile user = profileRepository.findProfileByEmail(emailRemoveRequest);
-            user.getMentoringListReceived().remove(toBeRemovedRequisition);
-            profileRepository.save(user);
-        } else if (Objects.equals(emailRemoveRequest, toBeRemovedRequisition.getRequiredUserEmail())) {
-            Profile requiredUser = profileRepository.findProfileByEmail(emailRemoveRequest);
-            requiredUser.getMentoringListGiven().remove(toBeRemovedRequisition);
-            profileRepository.save(requiredUser);
-        } else {
-            throw new NullPointerException();
-        }
+    public void registerRequisitionMentor(Requisition requisition, String profileEmail) {
+        Profile user = profileRepository.findProfileByEmail(profileEmail);
+        user.getMentoringListGiven().add(requisition);
+        profileRepository.save(user);
     }
+
+    public void deleteRequisitionFromLearner(Requisition toBeRemovedRequisition, String profileEmail) {
+        Profile user = profileRepository.findProfileByEmail(profileEmail);
+        user.getMentoringListReceived().remove(toBeRemovedRequisition);
+        profileRepository.save(user);
+    }
+
+    public void deleteRequisitionFromMentor(Requisition toBeRemovedRequisition, String profileEmail) {
+        Profile user = profileRepository.findProfileByEmail(profileEmail);
+        user.getMentoringListGiven().remove(toBeRemovedRequisition);
+        profileRepository.save(user);
+    }
+    
+
+    
 
 }

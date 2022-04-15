@@ -2,6 +2,7 @@ package com.fcamara.technicalshare.technicalshare.skill.controller;
 
 import com.fcamara.technicalshare.technicalshare.skill.dto.SkillDTO;
 import com.fcamara.technicalshare.technicalshare.skill.service.SkillService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -16,7 +17,7 @@ public class SkillController {
 
     private final SkillService skillService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<List<SkillDTO>> registerSkill(@RequestBody List<SkillDTO> skillDTOList) {
         return ResponseEntity.ok(skillService.registerSkill(skillDTOList));
     }
