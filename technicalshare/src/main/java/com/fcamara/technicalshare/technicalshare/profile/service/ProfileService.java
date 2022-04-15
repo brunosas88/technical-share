@@ -43,14 +43,14 @@ public class ProfileService {
 
     @Transactional
     public UserResponseDTO registerProfile(ProfileRegisterRequestDTO profileRegisterRequestDTO) {
+
         Profile newProfile = profileRepository.save(ProfileRegisterRequestDTO.convertToProfileModel(profileRegisterRequestDTO));
+        userService.registerUser(ProfileRegisterRequestDTO.convertToUserDTO(profileRegisterRequestDTO), newProfile);
         newProfile.getLinksList().addAll(registerProfileLinks(profileRegisterRequestDTO, newProfile));
         newProfile.getExpertiseList().addAll(registerProfileSkills(profileRegisterRequestDTO, newProfile));
         newProfile.getProfessionList().addAll(registerProfileProfessions(profileRegisterRequestDTO, newProfile));
         newProfile.getAcademicEducationList().addAll(registerProfileAcademics(profileRegisterRequestDTO, newProfile));
-        userService.registerUser(ProfileRegisterRequestDTO.convertToUserDTO(profileRegisterRequestDTO), newProfile);
-
-        return new UserResponseDTO(userService.getAuthentication(newProfile.getUserName(), newProfile.getEmail()), newProfile.getEmail());
+        return new UserResponseDTO(userService.getAuthentication(profileRegisterRequestDTO.getEmail(), profileRegisterRequestDTO.getPassword() ), newProfile.getEmail());
     }
 
     private List<AcademicEducation> registerProfileAcademics(ProfileRegisterRequestDTO profileRegisterRequestDTO, Profile newProfile) {
