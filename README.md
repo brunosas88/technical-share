@@ -4,24 +4,39 @@
         <a href='#'><img src='https://i.imgur.com/aKiNSth.png' alt='Logo Technical Share.' width='300px'/></a>
 </div>
 <br>
+<p align='center'>
+  <a href='#projeto'>Projeto</a> | 
+  <a href='#documentacao'>Documentação</a> | 
+  <a href='#tech'>Tecnologias</a> | 
+  <a href='#instrucoes'>Instruções</a> | 
+  <a href='#roteiro'>Roteiro</a> | 
+  <a href='#comorodaroprojeto'>Como Rodar o Projeto</a>
+<!--   <a href='#features'>Features</a> | 
+  <a href='#conteudoxterno'>Conteúdo Externo</a> | 
+  <a href='#nossaequipe'>Nossa Equipe</a> | 
+  <a href='#licenca'>Licença</a> |  -->
 
-<div style="text-align: justify">
+</p>
+
+<div id="projeto" style="text-align: justify">
         
 A Technical Share é uma aplicação web com o objetivo de catalogar os profissionais do Grupo FCamara para facilitar a troca de experiências e networking, principalmente de quem está em busca de orientações na área de tecnologia. Na plataforma, após a realização do cadastro do usuário, é possível ver os perfis dos profissionais já cadastrados na plataforma que contém, dentre outros, uma descrição do cargo que exercem, biografia pessoal e as habilidades que têm mais domínio. Essas informações já permitem ao usuário um rápido e fácil reconhecimento de pessoas das quais ele possa pedir orientações, tirar dúvidas e mesmo conhecer melhor os colegas que dividem o mesmo espaço de trabalho. Saiba mais sobre o projeto ![aqui](colocar URL do artigo de UX).<br>
 A API aqui apresentada foi implementada pelo time de desenvolvedores do Squad 8 pela etapa de Hackathon do [Programa de Formação Season 3](https://digital.fcamara.com.br/programadeformacao) do [Grupo FCamara](https://www.fcamara.com.br/), e mostra todas as rotas criadas no back-end para dar suporte as solicitações do front-end. 
-        
+
 </div>
 
-## Documentação
+<br>
+
+<h2 id='documentacao'>Documentação</h2>
 
 A documentação foi implementada com o uso do [Swagger](https://swagger.io/)
 <img src="MUDAR ESSA IMAGEM" alt="postman_sample" width="800">
 
-## Tecnologias
+<h2 id='tech'>Tecnologias</h2>
 
 O projeto foi desenvolvido empregando o framework do Swagger como interface para acesso direto às rotas do sistema implementado em [Spring Boot 2.6.6](https://spring.io/projects/spring-boot) e [Java 11](https://docs.oracle.com/en/java/javase/11/docs/api/index.html). O banco de dados utilizado foi PostgresSQL do próprio Heroku onde a aplicação está disponibilizada. Não são necessárias instalações de programas terceiros para executar e manipular a [API](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html). 
 
-## Instruções
+<h2 id='instrucoes'>Instruções</h2>
 
 Foi utilizada a configuração básica de segurança do Spring Security, por isso algumas rotas são de acesso restrito, controlado pelo tipo de autorização que cada usuário possui: 
 - ADMIN para administradores do sistema podem acessar todas as rotas com exceção da /skill/* , essa role possui a função exclusiva de cadastro de outros usuários e definições de suas autorizações através da rota user/register.
@@ -33,7 +48,9 @@ Foi utilizada a configuração básica de segurança do Spring Security, por iss
   - usuário dev / senha: dev (Autorização: DEV).
 - Obs. 3: O Back está disponivel na Web atraves da url https://technicalsharesquad8.herokuapp.com. Para utilização de qualquer rota basta completar a url com algum dos complementos mostrados na próxima sessão. Pode-se utilizar também o [Swagger-UI](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html) da aplicação.
 
-## Roteiro
+<br>
+
+<h2 id='roteiro'>Roteiro</h2>
 
 As rotas podem ser acessadas em qualquer ordem mas para melhor visualização dos dados de retorno é aconselhável a seguinte sequência:
 
@@ -65,15 +82,11 @@ As rotas podem ser acessadas em qualquer ordem mas para melhor visualização do
 ### 7. /user/login (não necessita de autenticação)
 
 
-
-
-
-
-Documentação
+<br>
 
 <h2 id="comorodaroprojeto">:gear:Como rodar o projeto?</h2>
 
-O Back está disponivel na Web atraves da url : https://technicalsharesquad8.herokuapp.com
+O Back está disponivel na Web atraves da url : https://technicalsharesquad8.herokuapp.com/
 
 Mas caso queira acessar localmente 
 
@@ -85,5 +98,5 @@ git clone https://github.com/#
 .
 .
 ```
-
+<hr>
 <p> Feito com muito 🧡 pelo Squad-8<br> #FuturosSangueLaranja 🚀 <p>
