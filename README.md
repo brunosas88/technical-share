@@ -15,7 +15,7 @@ A API aqui apresentada foi implementada pelo time de desenvolvedores do Squad 8 
 ## Documentação
 
 A documentação foi implementada com o uso do [Swagger](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html)
-<img src="https://user-images.githubusercontent.com/88353298/163490412-fa4769a0-0b2f-4dd4-aa1a-3e1e661d1a39.png" alt="postman_sample" width="800">
+<img src="MUDAR ESSA IMAGEM" alt="postman_sample" width="800">
 
 ## Tecnologias
 
