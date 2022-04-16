@@ -57,17 +57,33 @@ Foi utilizada a configuração básica de segurança do Spring Security, por iss
 
 O Back está disponivel na Web atraves da url https://technicalsharesquad8.herokuapp.com. Para utilização de qualquer rota basta completar a url com algum dos complementos mostrados na próxima sessão. Pode-se utilizar também o [Swagger-UI](https://technicalsharesquad8.herokuapp.com/swagger-ui/index.html) da aplicação.
 
-Mas caso queira acessar localmente:
+Mas caso queira acessar localmente ao site:
         
 ``` bash
-git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git ```
+git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git
 
-.
-.
-.
-.
+# Abra o projeto em um editor de codigo para Spring Boot de sua preferencia (recomendamos o [VSCode](https://code.visualstudio.com)
+# Caso escolhar rodar utilizando o VSCode certifique-se de que possue as seguintes extensões instaladas
+       # - Package Spring Boot 
+       # - 
+       
+# Pronto, agora apenas inicie sua aplicação
+#A aplicação (backend) está conectada com o Swagger e será aberta na porta:8080 - acesse http://localhost:8080. 
+
 ```
-        
+
+Caso queria ter acesso ao banco de dados que disponivel online localmente:
+
+- Abra uma ferramenta de administração de banco de dados Postegre de sua perferencia (recomentados o [DBeaver](https://dbeaver.io/download/)) 
+
+- Insira os dados para conexão
+<img src="https://user-images.githubusercontent.com/88353298/163654347-154918e3-5a21-41d8-b98d-9521ac4651c0.png" />
+
+*A imagem abaixo é um exemplo de como seria a conexão através do DBeaver*
+<img src="https://user-images.githubusercontent.com/88353298/163654343-ec7a16a3-5b16-44d4-994c-1242e5afc166.png" />
+
+e pronto ...
+
 
         
 <br>
