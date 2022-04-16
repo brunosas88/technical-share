@@ -99,17 +99,70 @@ e pronto ...
 As rotas podem ser acessadas em qualquer ordem mas para melhor visualização dos dados de retorno é aconselhável a seguinte sequência:
 
 ### 1. /skill (não necessita de autenticação)
-- Objetivo: Listar todas as habilidades cadastradas no banco de dados disponíveis para especificar as competências das quais o usuário se sente mais à vontade em compartilhar conhecimento.
-- Como fazer:
+- **Objetivo:** Listar todas as habilidades cadastradas no banco de dados disponíveis para especificar as competências das quais o usuário se sente mais à vontade em compartilhar conhecimento.
+- **Como fazer:**
   - Acessando a rota ela retorna a lista das habilidades que já estão no sistema.                       
-                                
-        https://technicalsharesquad8.herokuapp.com/skill   
+```                                 
+https://technicalsharesquad8.herokuapp.com/skill   
+``` 
 
-### 2. /profiles/register (não necessita de autenticação)
-- Objetivo: É enviado um json com as principais características a serem cadastradas no sistema e as informações são retornadas para confirmação. (Já possui algumas informações extras para o próximo update). 
-- Como fazer:  
+### 2. /skill/* (somente autenticação DEV)
+- **Objetivo:** Remoção/Atualização/Cadastro de habilidades no sistema.
+        - **Obs.:** Alteração e remoção só podem ser feitas em habilidades que ainda não foram utilizadas no cadastro de perfis. Por isso a equipe de desenvolvedores tem que estabelecer diretrizes e padronização para inserção de habilidades no sistema.  
+- **/skill/deletesingle** : Deleta uma habilidade do banco de dados a partir de seu nome. <br>
+        - **Como fazer:**
+                - Requisição enviada por parâmetro na url.
+```         
+https://technicalsharesquad8.herokuapp.com/skill/deletesingle?skill=PARAMETRO-NOME-SKILL-EXEMPLO
+```         
+- **/skill/update** : Atualiza o nome de uma habilidade ou sua area relacionada ou os dois campos a partir de seu nome antigo. <br>
+        - **Como fazer:**
+                - Requisição enviada por parâmetro na url.
+```         
+https://technicalsharesquad8.herokuapp.com/skill/update?toChangeSkill=PARAMETRO-NOME-ANTIGO-SKILL-EXEMPLO&newSkillName=PARAMETRO-NOME-NOVO-SKILL-EXEMPLO&newAreaName=PARAMETRO-AREA-EXEMPLO
+```         
+- **/skill/register** : Registra uma ou mais habilidades a partir de um json enviado. <br>
+        - **Como fazer:**
+            - Envio de json.
+<table>
+<tr>
+<th> Json </th>
+<th> Comentários </th>
+</tr>
+<tr>
+<td>
+
+```json
+[
+  {
+    "skill": "string",
+    "area": "string"
+  }
+]
+```
+
+</td>
+<td>
+
+```json
+
+  
+nome da habilidade
+nome da área a qual a habilidade está relacionada
+  
+
+```
+
+</td>
+</tr>
+</table>
+
+### 3. /profiles/register (não necessita de autenticação)
+- **Objetivo:** Cadastra um perfil profissional no sistema. (Já possui algumas informações extras para o próximo update). 
+- **Como fazer:**  
+  - Envio de json.
   - Cadastre dois ou mais usuários para melhor utilização das próximas rotas;
-  - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são userName, email, senha e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota /skill.
+  - Não precisa preencher todos os campos, os únicos requerimentos obrigatórios são **userName**, **email**, **senha** e caso decida colocar alguma habilidade, ela tem que seguir exatamente o padrão da rota **/skill**.
   - Obs.: O campo imagem guarda uma url que direcionaria para uma imagem na nuvem.
 
 <table>
@@ -157,42 +210,44 @@ area da habilidade (PRECISA SER EXATAMENTE O QUE ESTÁ NA REGISTRADO NO SISTEMA)
 </tr>
 </table>
 
-### 3. /profiles/* (métodos GET - necessita de alguma autenticação)
-- Objetivo: Encontrar perfil(s) no sistema.
-  1. /profiles/findprofile : Encontrar um perfil no sistema através do email.
-         - Como fazer:
+### 4. /profiles/* (métodos GET - necessita de alguma autenticação)
+- **Objetivo:** Encontrar perfil(s) no sistema.
+- **/profiles/findprofile** : Encontrar um perfil no sistema através do email. <br>
+        - **Como fazer:**
                 - Requisição enviada por parâmetro na url.
-        
-                https://technicalsharesquad8.herokuapp.com/profiles/findprofile?email=PARAMETRO-EMAIL-EXEMPLO
-        
-  2. /proiles/findbyskill : Utiliza campo "skill" das habilidades para filtrar os perfis buscados a partir de uma ou duas habilidades, permitindo também um filtro por nível de experiência (campo deve ter valor exatamente igual aos inseridos no campo experienceLevel ao registrar perfil). O único campo obrigatório é o "toExcludeProfileEmail" que serve para retirar da lista retornada o perfil de quem está fazendo essa busca.
-         - Como fazer:
+```         
+https://technicalsharesquad8.herokuapp.com/profiles/findprofile?email=PARAMETRO-EMAIL-EXEMPLO
+```         
+- **/profiles/findbyskill** : Utiliza campo "skill" das habilidades para filtrar os perfis buscados a partir de uma ou duas habilidades, permitindo também um filtro por nível de experiência (campo deve ter valor exatamente igual aos inseridos no campo experienceLevel ao registrar perfil). O único campo obrigatório é o "toExcludeProfileEmail" que serve para retirar da lista retornada o perfil de quem está fazendo essa busca. <br>
+        - **Como fazer:**
                 - Requisição enviada por parâmetros na url.
-        
-                https://technicalsharesquad8.herokuapp.com/profiles/findbyskill?firstSkill=PARAMETRO-SKILL-1-EXEMPLO&secondSkill=PARAMETRO-SKILL-2-EXEMPLO&filterXP=PARAMETRO-FILTRO-EXEMPLO&toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO  
-  
-  3. /proiles/findbyname : Retorna lista de usuários pelo nome ou parte dele, também utiliza o campo "toExcludeProfileEmail".
-         - Como fazer:
+```         
+https://technicalsharesquad8.herokuapp.com/profiles/findbyskill?firstSkill=PARAMETRO-SKILL-1-EXEMPLO&secondSkill=PARAMETRO-SKILL-2-EXEMPLO&filterXP=PARAMETRO-FILTRO-EXEMPLO&toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO  
+```  
+- **/profiles/findbyname** : Retorna lista de usuários pelo nome ou parte dele, também utiliza o campo "toExcludeProfileEmail". <br>
+        - **Como fazer:**
                 - Requisição enviada por parâmetros na url.
-        
-                https://technicalsharesquad8.herokuapp.com/profiles/findbyname?name=PARAMETRO-NOME-EXEMPLO&toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO  
-  
-  4. /profiles/findbyall : Apresenta listagem de todos os usuários do sistema exceto o perfil com email passado no campo "toExcludeProfileEmail".
-         - Como fazer:
+```         
+https://technicalsharesquad8.herokuapp.com/profiles/findbyname?name=PARAMETRO-NOME-EXEMPLO&toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO  
+```   
+- **/profiles/findbyall** : Apresenta listagem de todos os usuários do sistema exceto o perfil com email passado no campo "toExcludeProfileEmail". <br>
+        - **Como fazer:**
                 - Requisição enviada por parâmetros na url.
-        
-                https://technicalsharesquad8.herokuapp.com/profiles/findall?toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO
-                
-### 4. /requisitions (necessita de alguma autenticação)
+``` 
+https://technicalsharesquad8.herokuapp.com/profiles/findall?toExcludeProfileEmail=PARAMETRO-EMAIL-EXEMPLO
+```                
+### 5. /requisitions (necessita de alguma autenticação)
   1.GET
-        - Objetivo: Deleta uma requisição já feita a partir do uuid da requisição e do email da pessoa que está fazendo o pedido de remoção, seja a pessoa que fez ou a que recebeu a requisição do econtro.
-        - Como fazer:
-        
-        https://technicalsharesquad8.herokuapp.com/requisitions?uuidRequisition=EXEMPLO-UUID&emailRemoveRequest=EXEMPLO-EMAIL
-        
+        - **Objetivo:** Deleta uma requisição já feita a partir do uuid da requisição e do email da pessoa que está fazendo o pedido de remoção, seja a pessoa que fez ou a que recebeu a requisição do econtro.
+        - **Como fazer:**
+                - Requisição enviada por parâmetros na url.
+```         
+https://technicalsharesquad8.herokuapp.com/requisitions?uuidRequisition=EXEMPLO-UUID&emailRemoveRequest=EXEMPLO-EMAIL
+```        
   2.POST
-        - Objetivo: É enviado um json com os dados necessários para a marcação de um encontro entre quem realizou a requisição e o profissional escolhido. 
-        - Como fazer:
+        - **Objetivo:** Marcação de um encontro entre quem realizou a requisição e o profissional escolhido. 
+        - **Como fazer:**
+            - Envio de json.
 <table>
 <tr>
 <th> Json </th>
@@ -248,14 +303,11 @@ campo informando qual tipo de comunicação foi utilizado
 </tr>
 </table>
 
-2.GET
-        - Objetivo: Deleta uma requisição já feita a partir do uuid da requisição e do email da pessoa que está fazendo o pedido de remoção, seja a pessoa que fez ou a que recebeu a requisição do econtro.
-        - Como fazer:
-        
-        https://technicalsharesquad8.herokuapp.com/requisitions?uuidRequisition=EXEMPLO-UUID&emailRemoveRequest=EXEMPLO-EMAIL
-
-### 5. /skill/* (somente autenticação DEV)
-
+### 6. /user/register (somente autenticação ADMIN)
+- **Objetivo:** Registrar usuário(login, senha e nível de autenticação) no sistema.
+    - **Obs. :** Essa operação não cria um perfil de profisional dentro do sistema.
+    - **Como fazer:**
+        - Envio de json.
 <table>
 <tr>
 <th> Json </th>
@@ -264,22 +316,12 @@ campo informando qual tipo de comunicação foi utilizado
 <tr>
 <td>
 
-``` json
+```json
 {
-  "uuidRequisition": "3fa85f64-5717-4562-b3fc-2c963f66afa6",   
-  "userName": "string",         
-  "userEmail": "string",       
-  "requiredUserName": "string",        
-  "requiredUserEmail": "string",       
-  "subject": "string",         
-  "keyWords": "string",         
-  "urgency": true,      
-  "message": "string",         
-  "contactList": [      
-    {
-      "contact": "string",      
-      "type": "string"          
-    }
+  "userName": "string",
+  "password": "string",
+  "roles": [
+    "string"
   ]
 }
 ```
@@ -289,33 +331,46 @@ campo informando qual tipo de comunicação foi utilizado
 
 ```json
 
-  campo desnecessário, ele é gerado internamente pelo back
-  nome do usuário que está fazendo a requisição
-  email do usuário que está fazendo a requisição
-  nome do usuário que irá receber a requisição
-  email do usuário que irá receber a requisição
-  assunto que será tratado durante o encontro
-  palavras chaves que fazem parte do assunto a ser tratado
-  indicador com valores verdadeiro/falso para mostrar a urgência da requisição
-  texto com explicação mais detalhada sobre a intenção da marcação do encontro
-  lista de contatos para que o requisitado possa se comunicar com o solicitante 
-    
-  email, telefone ou outro contato em si
-  campo informando qual tipo de comunicação foi utilizado 
-    
-  
+nome do usuário 
+senha do usuário
+lista de níveis autenticação (pode ter mais de um)
+nível de autenticação do usuário
+
 
 ```
 
 </td>
 </tr>
-</table>
-
-
-### 6. /user/register (somente autenticação ADMIN)
+</table>   
 
 ### 7. /user/login (não necessita de autenticação)
+- **Objetivo:** Permitir acesso à aplicação web aos usuários com perfis profissionais cadastrados no sistema.
+    - **Como fazer:**
+        - Envio de json.
+<table>
+<tr>
+<th> Json </th>
+<th> Comentários </th>
+</tr>
+<tr>
+<td>
 
+```json
+{
+  "userName": "string",
+  "password": "string"
+}
+```
+
+</td>
+<td>
+
+```json
+
+nome do usuário 
+senha do usuário
+
+```
 
 <br>
 
