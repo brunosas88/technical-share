@@ -372,8 +372,11 @@ senha do usuário
 
 ```
 
-<br>
+</td>
+</tr>
+</table> 
 
+<br>
 
 <hr>
 <p> Feito com muito 🧡 pelo Squad-8<br> #FuturosSangueLaranja 🚀 <p>
