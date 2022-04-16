@@ -61,16 +61,22 @@ Mas caso queira acessar localmente ao site:
         
 ``` bash
 git clone https://github.com/squad8-hackatho/squad8-hackathon-back.git
-
-# Abra o projeto em um editor de codigo para Spring Boot de sua preferencia (recomendamos o [VSCode](https://code.visualstudio.com)
-# Caso escolhar rodar utilizando o VSCode certifique-se de que possue as seguintes extensões instaladas
-       # - Package Spring Boot 
-       # - 
-       
-# Pronto, agora apenas inicie sua aplicação
-#A aplicação (backend) está conectada com o Swagger e será aberta na porta:8080 - acesse http://localhost:8080. 
-
 ```
+- Abra o projeto em um editor de codigo para Spring Boot de sua preferencia (recomendamos o [VSCode](https://code.visualstudio.com)
+- Caso escolhar rodar utilizando o VSCode certifique-se de que possue as seguintes extensões instaladas
+  - [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+<img src="https://user-images.githubusercontent.com/88353298/163655204-b6ce2524-efcc-40a5-852e-d4d57309eb92.png" width="800"/>
+
+  - [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack)
+<img src="https://user-images.githubusercontent.com/88353298/163655232-cb2910b1-b49f-43cb-a4ee-aa5598d31e22.png" width="800"/>
+
+- Agora apenas inicie sua aplicação utilizando a guia "spring-boot-dashboard":
+<img src="https://user-images.githubusercontent.com/88353298/163655038-ff7da9cd-80d8-42db-89c6-5ad5e7ef81e8.png"/>
+
+<hr>
+*A aplicação (backend) está conectada com o Swagger e será aberta na porta:8080 - acesse http://localhost:8080.*
+
+<hr>
 
 Caso queria ter acesso ao banco de dados que disponivel online localmente:
 
